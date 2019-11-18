@@ -1,0 +1,53 @@
+<a
+  (click)="launchVerify('mailto')"
+  class="button feedback-button"
+  target="_blank">
+  <i class="fa fa-envelope"></i> FEEDBACK
+</a>
+
+<div *ngIf="confirmBox" class="confirmBox">
+  <h5 *ngIf="!selectReason">By clicking <strong>"Confirm"</strong> you agree NOT to share sensitive patient information
+    (PHI).</h5>
+
+  <div *ngIf="selectReason" style="margin-bottom:30px;">
+    <form class="form" method="POST" action="https://formspree.io/badams@element84.com" #form>
+      <div class="form-item">
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Enter Name..." class="form-control" id="name" required="">
+      </div>
+      <div class="form-item">
+        <label for="email">E-mail</label>
+        <input type="email" name="_replyto" placeholder="Enter E-mail Address..." id="email" required=""
+               class="form-control">
+      </div>
+      <div class="form-item">
+        <label for="subject">Reason for feedback</label>
+        <select name="reason" class="form-control" id="reason" required="" [(ngModel)]="selectedReason">
+          <option value="Bug" selected="">Bug</option>
+          <option value="Feature Request">Feature Request</option>
+          <option value="Question">Question</option>
+        </select>
+      </div>
+      <div class="form-item">
+        <label for="message">Message</label>
+        <div class="form-item-helper">
+          <i class="fa fa-exclamation-triangle" style="margin-right:5px;"></i>
+          <span
+            *ngIf="selectedReason == 'Bug'">Please provide Steps to reproduce and time bug occurred for the bug.</span>
+          <span *ngIf="selectedReason == 'Feature Request'">Please provide Description and business justification for the feature.</span>
+          <span
+            *ngIf="selectedReason == 'Question'">Along with your question please provide any supporting details.</span>
+        </div>
+        <textarea name="message" class="form-control" placeholder="Enter your message..."></textarea></div>
+
+      <button type="submit" class="button button-primary" (click)="form.submit()">Submit Feedback</button>
+      <button class="button" (click)="no()">Cancel</button>
+      <input type="hidden" name="_subject" value="Feedback Submission - {{selectedReason}}">
+      <input type="hidden" name="_cc" value=""/>
+      <input type="text" name="_gotcha" class="hide">
+    </form>
+  </div>
+
+  <button class="button button-primary" (click)="yes()" *ngIf="!selectReason">Confirm</button>
+
+</div>

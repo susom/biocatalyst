@@ -1,0 +1,39 @@
+
+.search-result {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 70%;
+  border: 1px solid #f1f1f1;
+  background: #fff;
+  display: block;
+  box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow: 1px 3px 25px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.results-count {
+  padding: 30px;
+  border-bottom: 1px solid #f1f1f1;
+  background: #fafafa;
+
+  h5 {
+    margin: 0;
+    font-weight: normal;
+    color: #888;
+    font-size: 1rem;
+
+    strong {
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    i {
+      margin-right: 15px;
+      color: #447ba7;
+    }
+  }
+}

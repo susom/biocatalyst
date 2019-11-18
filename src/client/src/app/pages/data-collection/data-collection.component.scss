@@ -1,0 +1,27 @@
+
+.collection-container {
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-outline {
+  color: #447BA7;
+  font-size: 0.9em;
+  background: transparent;
+  transition: all 0.3s;
+  padding: 6px 18px;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  .fa-angle-right {
+    margin-left: 15px;
+  }
+}

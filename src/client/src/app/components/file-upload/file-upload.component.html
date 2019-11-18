@@ -1,0 +1,9 @@
+<div class="upload-container">
+  <dx-file-uploader
+    name="file"
+    [visible]="!uploading"
+    (onValueChanged)="valueChanged($event)"
+    accept="text/*"
+    uploadMode="UseForm">
+  </dx-file-uploader>
+</div>

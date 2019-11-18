@@ -1,0 +1,50 @@
+.Status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1pc;
+  margin-bottom: 1pc;
+
+  p-messages {
+    width: 100%;
+  }
+}
+
+:host .ui-messages {
+  box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 1rem;
+
+  &.active {
+    display: block;
+  }
+}
+
+:host .ui-messages-info {
+  color: #276f86;
+  background-color: #f8ffff;
+  border-color: #a9d5de;
+}
+
+:host .ui-messages-warn {
+  color: #b58105;
+  background-color: #fff8db;
+  border-color: #b58105;
+}
+
+:host .ui-messages-error {
+  color: #f44336;
+  background-color: #fff6f6;
+  border-color: #e0b4b4;
+}
+
+:host .ui-messages-success {
+  color: #2c662d;
+  background-color: #fcfff5;
+  border-color: #a3c293;
+}
+
+
+.dx-loadindicator-icon .dx-loadindicator-segment {
+  color: white !important;
+}

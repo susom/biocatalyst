@@ -1,0 +1,122 @@
+<ng-content select="[panel-notice]"></ng-content>
+
+<div>
+  <h3>Connection Details</h3>
+  <ng-content select="[panel-connectiondetails]"></ng-content>
+</div>
+
+<div *ngIf="options?.length > 0">
+  <h3>Participant ID</h3>
+  <div *ngFor="let layout of subjectIdLayouts" class="ui-g">
+    <app-column-selector-dropdown
+      class="{{layout?.scssSpacing}}"
+      [label]="layout?.details?.label"
+      [defaultvalue]="layout?.details?.defaultValue"
+      [columns]="options"
+      (onSelection)="layout?.details?.onSelection($event)">
+    </app-column-selector-dropdown>
+    <app-column-selector-dropdown
+      *ngIf="layout?.type?.label"
+      class="{{layout?.scssSpacing}}"
+      [label]="layout?.type?.label"
+      [defaultvalue]="layout?.type?.defaultValue"
+      [columns]="layout?.type?.columns"
+      (onSelection)="layout?.type?.onSelection($event)">
+    </app-column-selector-dropdown>
+    <div *ngIf="layout?.configureColumn" class="{{layout?.scssSpacing}}" style="margin-top:9px;">
+      <app-data-source-button-configure-id
+        (buttonPressed)="configureSubjectID(layout)"
+        [disabled]="layout.disableColumnConfiguration"
+        [formatIDRequired]="!checkTokenProcessed(layout)"
+      ></app-data-source-button-configure-id>
+    </div>
+  </div>
+
+  <div *ngIf="visitIdLayouts?.length > 0">
+    <h3>Visit ID <small>Optional</small></h3>
+    <div *ngFor="let layout of visitIdLayouts.Layouts$ | async" class="ui-g">
+      <button
+        *ngIf="layout?.removeable"
+        (click)="layout?.onRemove(layout)"
+        class="{{layout?.scssSpacing}} button button-outline"
+        style="max-width: 60px; height: 45px; margin-top: 8px;  margin-right: 15px;">
+        <i class="fa fa-minus"></i>
+      </button>
+      <app-column-selector-dropdown
+        class="{{layout?.scssSpacing}}"
+        [label]="layout?.details?.label"
+        [defaultvalue]="layout?.details?.defaultValue"
+        [columns]="options"
+        (onSelection)="layout?.details?.onSelection($event)">
+      </app-column-selector-dropdown>
+      <app-column-selector-dropdown
+        *ngIf="layout?.type"
+        class="{{layout?.scssSpacing}}"
+        [label]="layout?.type?.label"
+        [defaultvalue]="layout?.type?.defaultValue"
+        [columns]="layout?.type?.columns"
+        (onSelection)="layout?.type?.onSelection($event)">
+      </app-column-selector-dropdown>
+
+      <div *ngIf="!layout?.hideColumnConfiguration">
+        <div *ngIf="!layout?.showAlternateColumnConfiguration">
+          <div *ngIf="layout?.configureColumn" class="{{layout?.scssSpacing}}">
+            <button
+              [disabled]="layout.disableColumnConfiguration"
+              (click)="triggerLaunchEditMappingModal.emit()"
+              mat-raised-button>
+              <span>Edit Mapping</span>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="!layout?.showAlternateColumnConfiguration == false">
+          <mat-form-field *ngIf="!dataSource?.primary" style="width: 100%; margin-top:15px;">
+            <span matPrefix>&plusmn;&nbsp;</span>
+            <mat-label>a few</mat-label>
+            <input
+              #visitDate
+              matInput
+              type="number"
+              [disabled]="layout.disableColumnConfiguration"
+              [value]="visitDateMatchingRangeInDays()"
+              (change)="visitDateModifier(visitDate.value)">
+            <span matSuffix>&nbsp; days</span>
+          </mat-form-field>
+
+          <button (click)="configureDateFormat(layout)" class="button button-outline">
+            <span>Configure Date Format</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ui-g" *ngIf="visitIdLayouts?.length < 1">
+    <div class="ui-g-12" *ngIf="!dataSource?.primary" style="padding:0">
+      <h3>Visit ID <small>Optional</small></h3>
+      <button (click)="addVisit()" class="button button-outline">
+        <i class="fa fa-plus" style="margin-right:10px;"></i>
+        <span>Add Visit Data</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!dataSource?.primary && options?.length > 0" class="ui-g">
+  <h3 class="ui-g-12" style="padding:0">Connection Details</h3>
+  <app-integration-connection
+    [sourceIdNames]="dataSourceNames"
+    style="width:100%;"
+    [sourceName]="dataSource?.name"
+    [subjectTokenizationInstructions]="dataSource?.integration_details?.subjectCode"
+    [visitTokenizationInstructions]="dataSource?.integration_details?.visitId"
+    [defaultConnections]="dataSource?.integration_details?.connections"
+    (onChangeFormData)="integrationConnectionUpdate($event)"
+    [launchModalTrigger]="triggerLaunchEditMappingModal"
+    [refresh]="triggerConnectionDetailsRefresh"></app-integration-connection>
+</div>
+
+<ng-content select="[panel-footer]"></ng-content>

@@ -1,0 +1,16 @@
+<app-simple-dialog-template (close)="Close()">
+    <span panel-title>
+      <i class="fa fa-exclamation fa-lg exclamation" style="color: #ff0000" aria-hidden="true"></i>
+      {{title}}
+    </span>
+  <span panel-content style="width: 100%;">
+      <p>{{message}}</p>
+      <span
+        style="
+          display: flex;
+          justify-content: space-around;
+        ">
+        <button mat-button style="float: right;" (click)="Close()"> OK </button>
+      </span>
+    </span>
+</app-simple-dialog-template>

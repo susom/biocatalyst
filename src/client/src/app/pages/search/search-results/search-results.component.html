@@ -1,0 +1,15 @@
+<app-loading [isLoading]="dataLoading"></app-loading>
+<div class="results-count" style="width:70%; margin:0 auto;background:rgba(0,0,0,0.05);">
+  <div *ngIf="showResults === 'default'"><h5 style="text-align:center;"><i class="fa fa-exclamation-triangle"></i>
+    Please enter a search term.</h5></div>
+  <div *ngIf="showResults === 'none'"><h5 style="text-align:center;"><i class="fa fa-exclamation-triangle"></i> No
+    results found, please try another search term.</h5></div>
+  <div [hidden]="!showResults" *ngIf="showResults === 'results'"
+       style="border-left:1px solid #eee;border-right:1px solid #eee;">
+    <h5>{{searchEntries.length}} result(s) for "<strong>{{queryValue}}</strong>"</h5>
+  </div>
+</div>
+
+<div *ngFor="let entry of searchEntries" class="search-result">
+  <search-entry [value]="entry" (onClick)="selectEntry(entry)"></search-entry>
+</div>

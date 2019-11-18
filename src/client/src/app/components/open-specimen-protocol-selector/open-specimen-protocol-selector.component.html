@@ -1,0 +1,18 @@
+    <mat-card-content >
+        <div class="panel-dropdown" #mypanel1 [style.height]="(focused) ? 'auto' : mypanel1.scrollHeight + 'px' ">
+                <p-dropdown 
+                	#dropdown 
+                    placeholder="Select a specimen collection protocol"
+                    (onFocus)="onFocus()"
+                    (onBlur)="onBlur()"
+                    (blur)="onBlur()"
+	                [options]="_options" 
+                    [disabled]="false" 
+                    [(ngModel)]="_selection"
+	                [autoWidth]="false" 
+                    (onChange)="Save_CPID()"
+	                [filter]="true"
+                    [style]="{'width':'100%'}"
+                ></p-dropdown>
+        </div>
+    </mat-card-content>

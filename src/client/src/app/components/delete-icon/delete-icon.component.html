@@ -1,0 +1,10 @@
+<i #tooltipHi="matTooltip"
+  class="fa fa-trash-o fa-lg"
+  matTooltip="Hold to Delete"
+  [matTooltipShowDelay]="2000"
+  (mousedown)="clicked = true"
+  (mouseup)="clicked = false"
+  (mouseover)="hovering = true"
+  (mouseout)="hovering = false"
+  aria-hidden="true">
+</i>

@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'war'
+	id 'java'
+	id 'com.palantir.docker' version '0.22.1'
+}
+
+group = 'edu.stanford.biocatalyst'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+docker {
+	files tasks.bootWar.outputs, '*.war'
+	copySpec.into("build/libs")
+	name "integrator"
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	compile files('./libucp.jar')
+
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+	compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.0'
+	compile 'com.zaxxer:HikariCP:2.6.0'
+	compile 'org.apache.httpcomponents:httpcore:4.4.6'
+	compile 'org.apache.httpcomponents:httpclient:4.5.3'
+	compile 'com.fasterxml.jackson.core:jackson-core'
+	compile 'org.json:json:20180813'
+
+
+	testCompile 'com.jayway.jsonpath:json-path:2.4.0'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.0-RC2'
+	testCompile 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+	testCompile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootRun {
+	environment = [ "environment": "local" ] // defaults to use local.properties, not docker.properties
+}

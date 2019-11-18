@@ -1,0 +1,15 @@
+<ul class="list side-menu-list">
+  <div *ngFor="let integration of integrations; let i = index ">
+    <li class="item" value={{i}} (click)="integrationClick(integration)" [ngClass]="{'selected':(i == selectedIndex)}">
+      <i *ngIf="!integration.valid" class="fa fa-exclamation fa-lg exclamation" aria-hidden="true"></i>
+      <span> {{integration.name}} </span>
+      <i class="fa fa-trash fa-lg hover" aria-hidden="true" (mousedown)="progress.MouseDown()"
+         (mouseup)="progress.MouseUp()" (mouseout)="progress.MouseUp()" (blur)="progress.MouseUp()">
+      </i>
+    </li>
+    <app-progress-bar-action #progress (Action)="delete(i)"></app-progress-bar-action>
+  </div>
+  <li style="text-align: center">
+    <button class="button-outline" (click)="addItem()"><i class="fa fa-plus"></i> New Integration</button>
+  </li>
+</ul>

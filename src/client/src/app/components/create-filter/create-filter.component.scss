@@ -1,0 +1,111 @@
+virtual-scroll {
+  display: block;
+  width: 100%;
+  height: 485px;
+}
+
+
+list-item {
+  display: block;
+  height: auto;
+}
+
+.MySelectorSpacing {
+  padding-left: 10px;
+}
+
+button.myAccordion::before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  text-decoration: inherit;
+  color: #777;
+  padding-right: 15px;
+}
+
+button.myAccordion.active::before {
+  content: "\f0d7";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+button.myAccordion {
+  background-color: #fafafa;
+  color: #3c7eb6;
+  cursor: pointer;
+  padding: 18px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+button.myAccordion.active,
+button.myAccordion:hover {
+  background-color: rgb(31, 78, 126);
+  transition: background-color 0.2s;
+  border-radius: 2px;
+  color: white;
+}
+
+$HoverColor: #2968a2;
+.ClearButton {
+  width: 128px;
+  margin: auto;
+  font-size: large;
+  color: #616161;
+
+  &:hover {
+    color: $HoverColor;
+  }
+}
+
+div.myPanel {
+  padding: 0 18px;
+  background-color: #fafafa;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+h2 {
+  color: rgba(80, 80, 80, .9);
+}
+
+h4 {
+  color: rgba(80, 80, 80, .9);
+}
+
+.multiSelect {
+  padding-left: 10px;
+}
+
+:host .ui-accordion {
+  border: 1px black;
+}
+
+:host .ui-accordion .ui-accordion-header a {
+  color: rgba(60, 126, 182, 1);
+}
+
+:host .ui-accordion-header {
+  background: rgb(250, 250, 250);
+  border: 0 none;
+}
+
+:host .ui-accordion-header.ui-state-active {
+  background: rgb(250, 250, 250);
+}
+
+:host .ui-accordion .ui-accordion-content {
+  background: rgb(250, 250, 250);
+}
+
+:host .ui-accordion .ui-accordion-header a {
+  text-decoration: none;
+}

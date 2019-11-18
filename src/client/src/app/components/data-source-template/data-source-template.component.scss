@@ -1,0 +1,69 @@
+.col-buzz {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.alert-info {
+  background: #E8EFF4;
+  color: #447BA7;
+  text-align: center;
+  padding: 10px 15px;
+  margin: 10px 0;
+}
+
+h3 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #8493A4;
+  margin-top: 30px;
+
+  small {
+    font-weight: 400;
+    color: #ccc;
+  }
+}
+
+.helper-text {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.format-id-section {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #f1f1f1;
+  background: #fafafa;
+
+  .button-link {
+    background: transparent;
+    color: #447BA7;
+    border: none;
+  }
+
+  small {
+    display: block;
+    color: #999;
+    font-size: 0.8rem;
+    margin: 5px auto 15px;
+  }
+}
+
+.button-outline.complete {
+  background: transparent;
+  border: 2px solid #00725F;
+  font-weight: bold;
+  color: #00725F;
+
+  &:hover {
+    cursor: pointer;
+    background: #00725F;
+    color: #fff;
+  }
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  .mat-form-field-empty {
+    color: #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}

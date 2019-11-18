@@ -1,0 +1,69 @@
+<app-loading [isLoading]="dataLoading"></app-loading>
+
+<div class="dashboard-status">
+  <div class="Status">
+    <p-messages [(value)]="status" [closable]="true"></p-messages>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="ui-g">
+      <div class="ui-g-3">
+        <h1 class="dashboard-title">Integrated Datasets</h1>
+      </div>
+      <div class="ui-g-5">
+        <form
+          *ngIf="myForm"
+          class="dashboard-search"
+          [formGroup]="myForm"
+          (submit)="toGlobalSearch()">
+          <div class="searchbar-wrap">
+            <input class="searchbar" placeholder="Search Datasets..." formControlName="input">
+            <i class="fa fa-search"></i>
+          </div>
+        </form>
+      </div>
+      <div class="ui-g-4" style="text-align:right;">
+        <!-- Sort button functionality not yet implemented
+          <button class="button"> Most Recent <info class="fa fa-caret-down"></info></button>
+        -->
+        <button class="button button-primary" (click)="addItem()">
+          New Integration <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-item" *ngFor="let integration of integrations; let i = index">
+    <div class="ui-g">
+      <div class="ui-g-3">
+        <div>
+          <a id={{i}} (click)="toAnalyze(integration,i)" style="font-weight:bold; font-size:1rem;">
+            <i *ngIf="!integration.valid" class="fa fa-exclamation fa-lg exclamation" aria-hidden="true"></i>
+            {{integration.name}}
+          </a>
+        </div>
+        <span class="record-count" [getCount]="integration._ids"><label class="warning">NO RECORDS FOUND!</label></span>
+      </div>
+      <div class="ui-g-3 muted">
+        <div *ngFor="let dataSource of integration.dataSources">{{dataSource.name}} - {{dataSource.type}}</div>
+      </div>
+      <div class="ui-g-6" style="text-align:right;">
+        <button class="button" (click)="sync(integration)"
+                [ngClass]="{'active': selectedIndex === i && pollingActive && !isError, 'error': isError}">
+          <i class="fa fa-refresh"></i> Refresh
+        </button>
+        <button class="button" (click)="toIntegrate(integration,i)">
+          <i class="fa fa-cog"></i> Modify Integration <i class="fa fa-angle-right" style="margin-left:10px;"></i>
+        </button>
+        <button class="button" (click)="toAnalyze(integration,i)">
+          <i class="fa fa-table"></i> Analyze <i class="fa fa-angle-right" style="margin-left:10px;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-footer"></div>
+</div>
+

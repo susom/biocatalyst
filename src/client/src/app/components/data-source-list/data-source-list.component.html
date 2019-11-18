@@ -1,0 +1,14 @@
+<mat-accordion multi="true">
+
+  <app-data-source-factory
+    *ngFor="let dataSource of dataSources; index as i"
+    [integration]="integration"
+    [dataSource]="dataSource"
+    [(dataSources)]="dataSources"
+    (dataSourceChange)="dataSourcesChange.emit(dataSources)"
+    (dataSourceDelete)="delete(i)"
+    [expanded]="hasSingleSource()">
+  </app-data-source-factory>
+
+</mat-accordion>
+

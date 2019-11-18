@@ -1,0 +1,147 @@
+<div class="left-filters" [ngClass]="{'collapsed': collapsedFilters,'top': scrolled }">
+  <div class="filter-heading">
+    <h3>Column Chooser</h3>
+    <button class="btn-link" (click)="toggleLeft()">
+      <i class="fa" [ngClass]="collapsedFilters ? ' fa-angle-double-right' : ' fa-angle-double-left'"></i>
+    </button>
+  </div>
+
+  <dx-list
+    [dataSource]="columnList"
+    selectionMode="all"
+    selectAllMode="page"
+    [showSelectionControls]="true"
+    (onSelectionChanged)="selectColumn($event)"
+    (onContentReady)="onListContentReady()"
+    [grouped]="true"
+    [collapsibleGroups]="true"
+    #chooserList>
+    <div *dxTemplate="let item of 'group'">
+      <div *ngIf="item.key > 0" class="group-header">
+        <div [className]="'highlight-' + item.key">
+          <strong>{{ sourceNames[item.key - 1] }}</strong>
+        </div>
+
+      </div>
+      <div *ngIf="item.key <= 0" class="group-header">
+        <div>Other</div>
+      </div>
+    </div>
+  </dx-list>
+</div>
+
+<div class="body-content" [ngClass]="collapsedFilters ? 'collapsed' : ''">
+  <dx-data-grid
+    #dataGrid
+    id="gridContainer"
+    noDataText="No data available! This integration may have failed, or is still in progress. "
+    [columns]="gridOptionColumns"
+    [dataSource]="data"
+    [showRowLines]="true"
+    [showBorders]="false"
+    [rowAlternationEnabled]="true"
+    [hoverStateEnabled]="true"
+    [allowColumnReordering]="true"
+    [allowColumnResizing]="true"
+    [sorting]="{mode: 'multiple'}"
+    [columnAutoWidth]="true"
+    [(selectedRowKeys)]="selectedRows"
+    (onToolbarPreparing)="onToolbarPreparing($event)"
+    (onContentReady)="onTableReady($event)"
+    (onCellPrepared)="onCellPrepared($event)">
+    <dxo-state-storing [enabled]="true" type="localStorage" storageKey="storage"></dxo-state-storing>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+
+    <!-- Toolbar Options -->
+    <dxo-paging [pageSize]="50"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[20, 50, 100]"></dxo-pager>
+
+    <dxo-selection
+      selectAllMode="allPages"
+      showCheckBoxesMode="always"
+      mode="multiple"></dxo-selection>
+    <dxo-filter-row [visible]="true" applyFilter="auto"></dxo-filter-row>
+    <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+    <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+    <dxi-column [allowSearch]="false"></dxi-column>
+
+    <dxo-export [enabled]="true" fileName="export" [allowExportSelectedData]="true"></dxo-export>
+
+    <div *dxTemplate="let data of 'totalGroupCount'">
+      <div class="informer informer-bold">
+        <strong>{{ countDisplay }}</strong>
+      </div>
+    </div>
+
+    <div *dxTemplate="let data of 'integrationSelection'">
+      <div class="informer">
+        <app-study-selector
+          [integration]="integration"
+          [integrations]="integrations"
+          [reports]="reports"
+          [report]="report"
+          (selectedChange)="onStudyAndReportSelection($event)"></app-study-selector>
+      </div>
+    </div>
+    <div *dxTemplate="let data of 'chips'">
+      <div class="informer">
+        <app-chips></app-chips>
+      </div>
+    </div>
+  </dx-data-grid>
+
+  <dx-popup
+    class="popup"
+    [width]="500"
+    [height]="300"
+    [showTitle]="true"
+    title="Save as Report"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="false"
+    [closeOnBackButton]="false"
+    [(visible)]="showPopup">
+    <div *dxTemplate="let data of 'content'">
+      <app-save-report-dialog
+        *ngIf="showPopup"
+        (onClose)="showPopup = !showPopup"
+        (onSave)="saveReport.emit()"
+      ></app-save-report-dialog>
+    </div>
+  </dx-popup>
+
+  <dx-popup
+    class="popup"
+    [width]="500"
+    [height]="300"
+    [showTitle]="true"
+    title="Share with user (COMING SOON)"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="false"
+    [closeOnBackButton]="false"
+    [(visible)]="showShare">
+    <div *dxTemplate="let data of 'content'">
+      <input type="text" class="form-control" placeholder="Stanford Email Address..." disabled/>
+    </div>
+  </dx-popup>
+
+  <dx-popover
+    target="#addFilter"
+    position="left"
+    [width]="500"
+    title="Filter Dataset"
+    [showTitle]="true"
+    [showCloseButton]="true"
+    [(visible)]="showFilter">
+    <div *dxTemplate="let data = model of 'content'">
+      <app-create-filter
+        *ngIf="showFilter"
+        (onApply)="filterCreated.emit($event)"
+        [(suggestions)]="suggestions"
+        [integration]="integration"
+      ></app-create-filter>
+    </div>
+  </dx-popover>
+</div>

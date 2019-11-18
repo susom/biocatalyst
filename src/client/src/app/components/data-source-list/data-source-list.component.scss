@@ -1,0 +1,18 @@
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.mat-expansion-panel {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.mat-expansion-panel-invalid {
+  border: 2px solid #BE5F5F;
+}

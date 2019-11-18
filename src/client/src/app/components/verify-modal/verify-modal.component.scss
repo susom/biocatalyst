@@ -1,0 +1,307 @@
+.format-id {
+  width: 100%;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.format-id {
+  width: 100%;
+  margin: 30px auto;
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.token-parent {
+  display: inline-block;
+}
+
+.token {
+  padding: 5px 20px;
+  text-align: center;
+  font-size: 60px;
+  position: relative;
+  border: 1px solid #f1f1f1;
+  border-right: none;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+.loading-container {
+  text-align: center;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.highlighted-id {
+  font-size: 30px;
+  color: #333;
+  letter-spacing: 3px;
+
+  strong {
+    font-weight: bold;
+  }
+}
+
+.token-parent:last-of-type .token {
+  border-right: 1px solid #f1f1f1;
+}
+
+/*.token:last-of-type .divider-button{display:none;}*/
+
+.token-parent:last-of-type .token .divider-button {
+  display: none;
+}
+
+.token .divider-button {
+  position: absolute;
+  right: -15px;
+  z-index: 3;
+  top: 30px;
+  font-size: 18px;
+  line-height: 20px;
+  background: #fff;
+  border: 1px solid #f1f1f1;
+  color: #ccc;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.2);
+  outline: None;
+  transition: all 0.3s;
+
+  &:hover {
+    color: #447BA7;
+    border-color: #447BA7;
+  }
+}
+
+.divider {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 50px;
+  border-left: 1px solid #f1f1f1;
+}
+
+.divider:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.token .divider-button:hover {
+  cursor: pointer;
+}
+
+.token .divider-button.active:hover {
+  color: red;
+}
+
+.token-parent.split {
+
+  position: relative;
+  border-radius: 4px;
+  background: #fff;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+
+  .split-tokens {
+    font-size: 60px;
+    transition: all 0.3s;
+    position: relative;
+
+    h2 {
+      color: #999;
+      margin: 0 auto;
+      padding: 15px 50px;
+    }
+
+    &.active h2 {
+      color: #333;
+    }
+  }
+
+  .hyphen {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 50px;
+    right: 15px;
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+//Remove borders and (+) buttons after clicking 'Done'
+.token-parent.inactive {
+  .token {
+    border: none;
+
+    .divider-button {
+      display: none;
+    }
+  }
+
+  .divider {
+    border: none;
+  }
+}
+
+.alert-info {
+  background: #E8EFF4;
+  color: #447BA7;
+  text-align: center;
+  padding: 10px 15px;
+  margin: 30px auto;
+}
+
+.alert-default {
+  background: #f9f9f9;
+  color: #333;
+}
+
+.alert-success {
+  background: #E7FAF7;
+  color: #00725F;
+  border: 1px solid #B0DED7;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 10px 15px;
+  margin: 30px auto;
+
+  a {
+    color: #00725F;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+label {
+  color: #999;
+  font-weight: bold;
+  font-size: 0.9em;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.step-buttons {
+  margin-bottom: 30px;
+  text-align: center;
+  justify-content: center;
+
+  .button {
+    margin-right: 15px;
+  }
+}
+
+.modal-footer {
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.textbox {
+  display: block;
+  width: 100%;
+  height: 40px; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  padding: 6px 15px;
+  font-size: 16px;
+  line-height: 28px;
+  background-color: #fff;
+  background-image: none; // reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.button-outline {
+  border: 1px solid #447BA7;
+  color: #447BA7;
+  display: block;
+  width: 80%;
+  margin: 0 auto 15px;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.active {
+    background: #447BA7;
+    color: #fff;
+  }
+}
+
+.button i {
+  margin-right: 10px;
+}
+
+.primary-id-container {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+
+  .primary-id {
+    display: inline-block;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 15px 30px;
+    border: 1px solid #f1f1f1;
+
+    label {
+      display: block;
+      color: #999;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #777;
+      margin: 0 auto;
+    }
+  }
+}
+
+.growth-tokens-radio {
+  font-size: 1rem;
+  margin: 15px auto;
+  padding-top: 15px;
+  width: 100%;
+  border-top: 1px solid #f1f1f1;
+
+  input[type=radio] ~ label {
+    margin-left: 15px;
+    font-weight: normal;
+    color: #999;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input[type=radio]:checked ~ label {
+    color: #447BA7;
+    font-weight: bold;
+  }
+
+  input[type=radio]:disabled ~ label {
+    opacity: 0.3;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+}

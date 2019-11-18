@@ -1,0 +1,37 @@
+//Customize material select boxes to look like more standard select boxes for UX reasons
+
+.mat-expansion-panel-invalid {
+  box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.15);
+  border: 2px solid red;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: 1px 3px 16px rgba(0, 0, 0, 0.05);
+}
+
+.expanded-title {
+  font-size: 30px;
+  margin-bottom: 50px;
+  margin-top: -30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mat-expanded {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.label-primary {
+  margin-right: 30px;
+  background: #447ba7;
+  padding: 2px 8px;
+  font-size: 0.7em;
+  color: #fff;
+  border-radius: 2px;
+  text-transform: uppercase;
+}

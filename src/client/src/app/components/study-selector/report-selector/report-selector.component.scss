@@ -1,0 +1,28 @@
+::ng-deep .report-selector {
+  border-radius: 0 4px 4px 0 !important;
+  border-left: none !important;
+}
+
+::ng-deep .custom-item-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .custom-item {
+    width: 140px;
+    margin-top: 6px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+  }
+}
+
+.dx-texteditor-input {
+  background: #f3f3f3;
+  border-radius: 0 4px 4px 0;
+}
+
+::ng-deep .dx-overlay-content.dx-popup-normal {
+  min-width: 200px !important;
+}

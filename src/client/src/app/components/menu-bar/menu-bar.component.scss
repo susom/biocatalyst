@@ -1,0 +1,66 @@
+.myMenuBar {
+  background: linear-gradient(to bottom, #205081 0%, #194571 100%);
+  height: 45px;
+}
+
+
+.logo {
+  margin: 0px;
+  margin-left: 10px;
+  font-family: initial;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24px;
+  line-height: 44px;
+  font-weight: 300;
+  color: white;
+  font-family: Crimson;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
+
+
+.options {
+  float: right;
+  list-style-type: none;
+  width: auto;
+  margin: 0;
+  height: 45px;
+  padding: 0;
+}
+
+.optionItem {
+  display: inline-block;
+  line-height: 45px;
+  color: #fff;
+  opacity: 0.5;
+  padding: 0 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .icon {
+    font-size: 1.4em;
+    margin-right: 5px;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+
+  &.active {
+    opacity: 1.0;
+    background: #133B63;
+  }
+
+  &.feedback {
+    opacity: 1.0;
+    margin-left: 5px;
+  }
+}

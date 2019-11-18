@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" style="width:95%;" [formGroup]="form" dividerColor="accent">
+  <mat-label>{{label}}</mat-label>
+  <mat-select placeholder="Please select" formControlName="{{COLUMN_SELECTOR_DROPDOWN}}">
+    <mat-option *ngIf="enableEmptyOption"></mat-option>
+    <mat-option *ngFor="let column of columns" [value]="column.value">
+      {{column.key}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

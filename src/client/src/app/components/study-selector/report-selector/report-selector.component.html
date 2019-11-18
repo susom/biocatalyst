@@ -1,0 +1,16 @@
+<dx-select-box
+  #ReportSelector
+  [width]="140"
+  placeholder="Load Report"
+  [dataSource]="reportOptions"
+  displayExpr="Name"
+  valueExp="_ids"
+  class="report-selector"
+  (onSelectionChanged)="selectReport($event)">
+
+  <div *dxTemplate="let data of 'item'" class="custom-item-wrapper">
+    <div class="custom-item" style="display:inline-block;">{{data.Name}}</div>
+    <dx-button icon="trash" style="float:right;border:none;" (click)="deleteReport(data)"></dx-button>
+  </div>
+
+</dx-select-box>

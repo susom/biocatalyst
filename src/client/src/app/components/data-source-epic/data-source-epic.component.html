@@ -1,0 +1,81 @@
+<div style="overflow: unset;">
+  <div class="ui-g">
+    <div style="
+      display: flex;
+      width: 100%;
+      align-items: center;"
+    >
+      <i style="color: #bca02e;" class="fa fa-exclamation-triangle"></i>
+      <p style=" margin-left: 5px;">CSV as a primary source is not supported when an EPIC data source exists</p>
+    </div>
+
+    <dx-select-box
+      #irb
+      style="width:100%;"
+      [items]="irbs"
+      displayExpr="protocolTitle"
+      valueExpr="protocol"
+      (onValueChanged)="getMetadata.emit(irb?.value)"
+      [(value)]="irbNumber"
+      showClearButton="true"
+
+    >
+    </dx-select-box>
+
+    <div class="dx-field-value" style="
+        width:95%;
+        margin: auto;
+        border-top-color: #fff0;
+        border-bottom-color: #ddd;">
+
+      <dx-accordion
+        *ngIf="data_types.length > 0"
+        #accordion
+        [dataSource]="data_types"
+        [collapsible]="true"
+        [multiple]="true"
+        [animationDuration]="300"
+        [disabled]="gettingMetadata.stream$ | async"
+        [selectedItems]="[]">
+        <div *dxTemplate="let data of 'title'">
+          <div style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;">
+            <dx-check-box
+              [text]="data.type"
+              [(value)]="data.selectAll"
+              (onValueChanged)="selectAll([$event,data])"
+            ></dx-check-box>
+            <p style="margin: 0" *ngIf="data.itemsSelected > 0">
+              {{data.itemsSelectedText}}
+            </p>
+          </div>
+        </div>
+        <div *dxTemplate="let data of 'item'">
+          <div *ngFor="let column of data.columns">
+            <dx-check-box
+              [text]="column.text"
+              [(value)]="column.selected"
+              (onValueChanged)="columnSelected([$event,data])"
+            ></dx-check-box>
+          </div>
+        </div>
+      </dx-accordion>
+
+    </div>
+
+    <app-column-selector-dropdown
+      class="ui-g-12"
+      *ngIf="data_types.length > 0"
+      [label]="columnSelector?.label"
+      [defaultvalue]="columnSelector?.defaultValue"
+      [columns]="columnSelector?.columns"
+      [enableEmptyOption]="false"
+      (onSelection)="columnSelector?.onSelection($event)">
+    </app-column-selector-dropdown>
+
+  </div>
+  <div class="ui-g" *ngIf="!source.primary"></div>
+</div>
+

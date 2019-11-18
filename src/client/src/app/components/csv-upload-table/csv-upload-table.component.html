@@ -1,0 +1,30 @@
+<div class="ui-g-12" *ngIf="!fileData">
+  <div class="alert alert-info">
+    <i class="fa fa-info-circle"></i> You can upload data in the form of a CSV file with information about your
+    collected specimen.
+  </div>
+</div>
+
+<div class="ui-g-12" *ngIf="!fileData">
+  <app-file-upload (fileUploaded)="onFileUploaded($event)"></app-file-upload>
+</div>
+
+<div class="ui-g-12" *ngIf="!!fileData">
+  <h3 style="text-align: center;" *ngIf="fileName">
+    Preview of {{fileName}}
+  </h3>
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="fileData"
+    [showBorders]="true"
+    columnAutoWidth="true">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[5, 10, 20]"
+      [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column *ngFor="let header of fileHeaders" dataField="{{header}}"></dxi-column>
+  </dx-data-grid>
+</div>

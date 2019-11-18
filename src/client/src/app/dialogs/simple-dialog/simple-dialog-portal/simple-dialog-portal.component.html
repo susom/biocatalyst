@@ -1,0 +1,5 @@
+<app-simple-dialog-template (close)="Close()">
+  <div style="width: 100%; height: 100%" panel-content>
+    <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+  </div>
+</app-simple-dialog-template>

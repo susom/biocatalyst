@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="panel">
+    <div class="information">
+      <h1>Login</h1>
+      <p>
+        Information goes here for telling people about the login.
+      </p>
+    </div>
+    <mat-card class="login-form">
+      <mat-form-field>
+        <mat-label>User Name</mat-label>
+        <input id="username" [disabled]="isAuthenticating" [(ngModel)]="username" matInput/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input id="password" type="password" [disabled]="isAuthenticating" [(ngModel)]="password" matInput/>
+      </mat-form-field>
+      <div class="actions">
+        <button [disabled]="isAuthenticating" mat-raised-button (click)="loginClick()">Login</button>
+      </div>
+    </mat-card>
+  </mat-card>
+</div>
+<app-loading [isLoading]="isAuthenticating"></app-loading>

@@ -1,0 +1,20 @@
+<div class="form">
+  <div class="widget-container">
+		<span [ngSwitch]="Loading$ | async">
+			<div *ngSwitchCase="true">
+				<dx-load-indicator></dx-load-indicator>
+			</div>
+			<div *ngSwitchCase="false">
+				<dx-list
+          [items]="Options$ | async"
+          [showSelectionControls]="true"
+          selectionMode="single"
+          height="100%"
+          noDataText="No Available Suggestions. Please try another field, or check your data format."
+          [selectedItems]="SelectedItems$ | async"
+          (onSelectionChanged)="onValueChanged($event)">
+				</dx-list>
+			</div>
+		</span>
+  </div>
+</div>

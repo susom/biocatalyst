@@ -1,0 +1,83 @@
+<mat-expansion-panel
+  #expansion
+  [ngClass]="{'mat-expansion-panel-invalid':!dataSource.valid}"
+  *ngIf="dataSource"
+  [expanded]="!dataSource.type.label">
+
+  <mat-expansion-panel-header style="margin-bottom: 0;">
+    <mat-panel-title @showState>
+      <p class="panel-title" *ngIf="!expansion.expanded">{{ dataSource?.name }}<p>
+    </mat-panel-title>
+    <mat-panel-description style="justify-content: flex-end; align-items: center;width: 0%; position: relative;">
+      <p *ngIf="dataSource.primary" style="margin-right: 30px;"><span class="label-primary">Primary</span></p>
+      <app-delete-icon
+        *ngIf="dataSource?.deletable"
+        (mousedown)="progress.MouseDown()"
+        (mouseup)="progress.MouseUp()"
+        (mouseout)="progress.MouseUp()"
+        (blur)="progress.MouseUp()">
+      </app-delete-icon>
+    </mat-panel-description>
+    <app-progress-bar-action #progress style="position: absolute;margin-top: 23px; width: 90%" (Action)="dataSourceDelete.emit()">
+    </app-progress-bar-action>
+  </mat-expansion-panel-header>
+
+  <div class="expanded-title" *ngIf="expansion.expanded">
+    <app-editable-text
+      #editableText
+      [(text)]="dataSource.name"
+      [editable]="!dataSource.primary">
+    </app-editable-text>
+  </div>
+
+  <mat-form-field [formGroup]="myForm" appearance="outline" style="width:100%;">
+    <mat-label>Data Source Type</mat-label>
+    <mat-select placeholder="Data Source Type" formControlName="type" required>
+			<span *ngFor="let colType of COLUMN_TYPES">
+			  <mat-option [value]="colType.value">
+				{{colType.label}}
+			  </mat-option>
+			</span>
+    </mat-select>
+    <mat-error *ngIf="getControlError('type','required')">
+      Required
+    </mat-error>
+  </mat-form-field>
+
+  <div [ngSwitch]="dataSource.type">
+
+    <app-data-source-openspecimen-form
+      [source]="dataSource"
+      [sourceTypeChange]="onSourceTypeChange"
+      (onChange)="onFormChange($event)"
+      *ngSwitchCase="'OPENSPECIMEN'">
+    </app-data-source-openspecimen-form>
+
+    <app-data-source-redcap-form
+      [source]="dataSource"
+      [sources]="dataSources"
+      [sourceTypeChange]="onSourceTypeChange"
+      (onChange)="onFormChange($event)"
+      *ngSwitchCase="'REDCAP'">
+    </app-data-source-redcap-form>
+
+    <app-data-source-csv-form
+      [integration]="integration"
+      [(dataSource)]="dataSource"
+      (dataSourceChange)="dataSourceChange.emit($event)"
+      [(sourceType)]="dataSource.type"
+      [dataSources]="dataSources"
+      *ngSwitchCase="'CSV'">
+    </app-data-source-csv-form>
+
+    <app-data-source-epic-form
+      [source]="dataSource"
+      [sources]="dataSources"
+      [sourceTypeChange]="onSourceTypeChange"
+      (onChange)="onFormChange($event)"
+      *ngSwitchCase="'EPIC'">
+    </app-data-source-epic-form>
+
+  </div>
+
+</mat-expansion-panel>

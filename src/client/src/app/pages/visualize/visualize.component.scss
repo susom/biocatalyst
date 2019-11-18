@@ -1,0 +1,135 @@
+/* Begin Chart Styling */
+.fullscreen {
+  position: relative;
+}
+
+.chart-container {
+  margin: 15px auto 30px;
+  border: 1px solid #f1f1f1;
+  box-shadow: 1px 3px 20px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+.chart-container-header {
+  width: 100%;
+  padding: 0 15px;
+  border-bottom: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+
+  .column {
+    flex: 1;
+  }
+
+  .column-one {
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+  }
+
+  .column-two {
+    max-width: 40%;
+  }
+
+  .mat-form-field {
+    width: 35%;
+  }
+
+  .header-label {
+    display: inline-block;
+    padding: 5px 30px 5px 15px;
+    margin-right: 30px;
+    border-right: 1px solid #f1f1f1;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .header-select {
+    margin-right: 15px;
+  }
+
+  .mat-button {
+    border: 1px solid #eee;
+    padding: 0 10px;
+    font-size: .8em;
+    min-width: 30px;
+
+    .material-icons {
+      font-size: 18px;
+      line-height: 15px;
+    }
+  }
+;
+
+  .mat-input-underline, .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {
+    display: none;
+  }
+}
+
+.chart-container-content {
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  right: 0;
+  padding-left: 460px;
+}
+
+.chart-centered {
+  display: flex;
+  justify-content: center;
+}
+
+.alert.alert-info {
+  background: #E8EFF4;
+  color: #447BA7;
+  text-align: center;
+  padding: 10px 15px;
+  margin: 30px;
+
+  h4 {
+    margin: 0;
+    font-weight: bold;
+  }
+}
+
+//Mobile
+@media screen and (max-width: 767px) {
+  .row {
+    display: block;
+
+    .column-one, .column-two {
+      max-width: 100%;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-form-field-wrapper {
+      border-right: none;
+    }
+  }
+}
+
+//Styles for printing charts
+@media print {
+  .column-two, .btn-link {
+    display: none !important;
+    box-shadow: none;
+    background: transparent;
+  }
+  .chart-container {
+    box-shadow: none;
+    border: none;
+  }
+  .chart-container-content {
+    display: block !important;
+    width: 100%;
+    overflow: visible !important;
+    margin: 0;
+  }
+}
+
+/**
+End Chart Styling **/

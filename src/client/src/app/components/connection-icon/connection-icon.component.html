@@ -1,0 +1,11 @@
+<div style="display:inline-block;" [ngSwitch]="currentState">
+  <span *ngSwitchCase="states.DISCONNECTED" mat-raised-button>
+   <i class="fa fa-chain-broken connection" style="color:#fff;font-size:18px;"></i>
+  </span>
+  <span *ngSwitchCase="states.LOADING" mat-raised-button>
+	<i class="fa fa-cog fa-spin fa-fw " style="color:#fff;font-size:18px;"></i>
+  </span>
+  <div *ngSwitchCase="states.CONNECTED" mat-raised-button>
+    <i class="fa fa-link connection" style="color:#fff;font-size:18px;"></i>
+  </div>
+</div>

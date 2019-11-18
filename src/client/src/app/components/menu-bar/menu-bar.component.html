@@ -1,0 +1,15 @@
+<div class="myMenuBar">
+  <h2 class="logo" (click)="refreshPage()">
+    BIOCATALYST
+  </h2>
+  <ul class="options">
+    <li class="optionItem" (click)="option.onClick($event)" *ngFor="let option of options"
+        [ngClass]="{'active': option.active}">
+      <i [class]="option.css" aria-hidden="true"></i>
+      {{option.name}}
+    </li>
+    <li class="optionItem feedback">
+      <feedback-button></feedback-button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,236 @@
+::ng-deep #pivotgrid {
+  margin-top: 20px;
+}
+
+::ng-deep .currency {
+  text-align: center;
+}
+
+::ng-deep .left-filters .dx-pivotgridfieldchooser {
+  width: 100%;
+  height: 90% !important;
+}
+
+::ng-deep .left-filters .dx-pivotgridfieldchooser {
+  .dx-col {
+    width: 40%;
+
+    &:first-of-type {
+      width: 60%;
+    }
+  }
+
+  .dx-area-fields-header {
+    color: #447ba7;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  span.dx-area-icon {
+    opacity: 0.75;
+  }
+}
+
+.row-element {
+  margin-right: 5px;
+}
+
+.chart-container {
+  padding: 0;
+  display: flex;
+
+  .ui-g-3.left-filters {
+    background: #F6F6F6;
+    box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    box-sizing: border-box;
+    min-height: 590px;
+    height: 100vh;
+    height: calc(100vh - 45px);
+    width: 420px;
+    @media screen and (max-width: 1024px) {
+      width: 100%
+    }
+
+    .filter-heading {
+      font-weight: 400;
+      letter-spacing: -1px;
+      font-size: 1.3rem;
+      margin: 0;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f1f1f1;
+      position: relative;
+
+      .btn-link {
+        line-height: 15px;
+        font-size: 0.9rem;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+
+      h3 {
+        font-weight: 400;
+        letter-spacing: -1px;
+        font-size: 1.3rem;
+        margin: 30px 0 0 0;
+        display: inline-block;
+      }
+    }
+  }
+
+  .ui-g-9.right-body {
+    padding: 15px;
+    background: #fff;
+    width: calc(100vw - 420px);
+    margin-left: 420px;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%
+    }
+  }
+}
+
+.chart-container-header {
+  width: 100%;
+  padding: 0 15px 15px 15px;
+  border-bottom: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+
+  .column {
+    flex: 1;
+  }
+
+  .column-one {
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+  }
+
+  .column-two {
+    max-width: 40%;
+  }
+
+  .mat-form-field {
+    width: 35%;
+  }
+
+  .header-label {
+    display: inline-block;
+    padding: 5px 15px;
+    margin-right: 30px;
+    border-right: 1px solid #f1f1f1;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .header-select {
+    margin-right: 15px;
+  }
+
+  .mat-button {
+    border: 1px solid #eee;
+    padding: 0 10px;
+    font-size: .8em;
+    min-width: 30px;
+
+    .material-icons {
+      font-size: 18px;
+      line-height: 15px;
+    }
+  }
+;
+
+  .mat-input-underline, .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder, .mat-form-field-empty.mat-form-field-placeholder {
+    display: none;
+  }
+}
+
+.chart-container-content {
+  padding: 15px;
+}
+
+.chart-centered {
+  display: flex;
+  justify-content: center;
+}
+
+.alert.alert-danger {
+  padding: 15px;
+  border: 1px solid #EAB2B2;
+  background: #FAE1E1;
+  color: #E04E4E;
+  text-align: center;
+  margin: 30px auto;
+  border-radius: 4px;
+
+  h4 {
+    margin: 0;
+    font-weight: bold;
+  }
+}
+
+//Mobile
+@media screen and (max-width: 767px) {
+  .row {
+    display: block;
+
+    .column-one, .column-two {
+      max-width: 100%;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-form-field-wrapper {
+      border-right: none;
+    }
+  }
+}
+
+.input-select-wrap {
+  display: block;
+  position: relative;
+  margin: 0;
+
+  select.input-select {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-padding-end: 20px;
+    border: none;
+    -moz-padding-end: 20px;
+    -webkit-padding-start: 4px;
+    -moz-padding-start: 4px;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #222;
+    font-size: .9rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0;
+    overflow: hidden;
+    padding: 8px 48px 8px 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  i.fa {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+  }
+}

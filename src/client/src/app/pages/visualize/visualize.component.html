@@ -1,0 +1,25 @@
+<div class="ui-g">
+  <div class="ui-g-12" style="padding:0;">
+
+    <!-- Cannot be removed from the DOM since we need it to maintain it's state -->
+    <span [style.display]="(!isLoading && !selectedData?.length > 0) ? 'inherit' : 'none'">
+
+					<div id="pivotgrid-demo" *ngIf="selectedChart === 'Pivot'">
+							<div id="pivotgrid-demo">
+								<app-pivot-table
+                  [data]="selectedData"
+                  idField="s0_visit_name"
+                  [refreshTable]="refreshTable"
+                  [usePreviousHeadersOnUpdate]="true"
+                  [isLoading]="isLoading"
+                  [selectedData]="selectedData">
+                </app-pivot-table>
+							</div>
+					</div>
+			</span>
+    <div [style.display]="(!isLoading && !selectedData?.length > 0) ? 'inherit' : 'none'" class="alert alert-danger">
+      <h4><i class="fa fa-exclamation-mark"></i> No Data Found!</h4>
+      Make sure you selected a valid dataset on the Data Collection page.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="ui-g" style="top:0;height: 10%" *ngIf="(TableData$ | async) != null">
+  <div class="ui-g-12" style="display: flex;justify-content: space-around;">
+    <app-column-selector-dropdown
+      class="{{details?.scssClass}}"
+      *ngFor="let details of integrationDetails"
+      [label]="details?.label"
+      [defaultvalue]="details?.defaultValue"
+      [columns]="TableHeaders$ | async"
+      [enableEmptyOption]="false"
+      (onSelection)="details?.onSelection($event)">
+    </app-column-selector-dropdown>
+  </div>
+</div>
+
+<div style="height: 80%">
+<!--  <p-dataTable-->
+<!--    *ngIf="(TableData$ | async) != null"-->
+<!--    #csvDataTable-->
+<!--    [value]="TableData$ | async"-->
+<!--    scrollable="true"-->
+<!--    scrollHeight="100%"-->
+<!--    [editable]="true"-->
+<!--    [immutable]="false"-->
+<!--    (onEditComplete)="EditComplete()"-->
+<!--    scrollWidth="100%">-->
+<!--    <p-column-->
+<!--      *ngFor="let header of TableHeaders$ | async"-->
+<!--      [header]="header.key"-->
+<!--      [field]="header.value"-->
+<!--      [editable]="true"-->
+<!--      [style]="{'width':'250px'}"></p-column>-->
+
+<!--    <p-column-->
+<!--      [style]="{'width':'60px','text-align': 'center'}">-->
+<!--      <ng-template pTemplate="header">-->
+<!--      </ng-template>-->
+<!--      <ng-template pTemplate="body" let-ri="rowIndex">-->
+<!--        <button-->
+<!--          type="button"-->
+<!--          pButton-->
+<!--          (buttonPressed)="RemoveRow(ri)"-->
+<!--          icon="fa fa-trash"-->
+<!--          pTooltip="delete Row"></button>-->
+<!--      </ng-template>-->
+<!--    </p-column>-->
+<!--  </p-dataTable>-->
+</div>
+
+<div class="ui-g" style="bottom:0;max-height: 10%">
+  <div class="ui-g-12" style="display: flex;justify-content: space-around;margin-bottom: 1pc">
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-primary"
+      style="margin-top:15px;"
+      *ngIf="(TableHeaders$ | async) != null"
+      (click)="AddRow()">
+      Add Row
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-primary"
+      style="margin-top:15px;"
+      *ngIf="(TableHeaders$ | async) != null"
+      (click)="AddRow(10)">
+      Add 10 Rows
+    </button>
+    <input
+      #fileInput
+      type="file"
+      style="display: none"
+      accept="text/csv"
+      (change)="Upload($event)"/>
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-primary"
+      style="margin-top:15px;"
+      (click)="fileInput.click()">
+      Upload
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-primary"
+      style="margin-top:15px;"
+      *ngIf="(TableData$ | async) != null"
+      (click)="csvDataTable.exportCSV()">
+      Download
+    </button>
+
+  </div>
+</div>

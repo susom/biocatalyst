@@ -1,0 +1,43 @@
+.chips {
+  background: #447ba7;
+  color: #e3e3e3;
+  transition: background-color .5s !important;
+  position: relative;
+
+  span {
+    transition: visibility .5s, opacity .5s;
+  }
+
+  span.chips-delete {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    line-height: inherit;
+    color: rgb(40, 40, 40);
+    text-align: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: #64B5f6;
+
+    span.chips-label {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    span.chips-delete {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

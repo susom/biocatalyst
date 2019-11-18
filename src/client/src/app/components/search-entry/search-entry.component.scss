@@ -1,0 +1,30 @@
+.search-result-wrap {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+h2 {
+  color: #3c7eb6;
+  margin: 0;
+  font-weight: normal;
+}
+
+h2:hover {
+  color: #2f536f;
+  transition: color 0.2s;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  text-overflow: ellipsis;
+  color: #999;
+}
+

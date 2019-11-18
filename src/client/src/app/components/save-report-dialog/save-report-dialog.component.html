@@ -1,0 +1,45 @@
+<div *ngIf="!overWrite.value; else OverWrite" class="widget-container">
+  <dx-text-box
+    [(value)]="text"
+    [showClearButton]="true"
+    (onEnterKey)="checkForOverwrite.emit(text)">
+  </dx-text-box>
+  <div style="
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;">
+    <dx-button
+      width="150"
+      text="cancel"
+      (onClick)="onClose.emit($event)">
+    </dx-button>
+    <dx-button
+      width="150"
+      text="save"
+      (onClick)="checkForOverwrite.emit(text)">
+    </dx-button>
+  </div>
+</div>
+
+<ng-template #OverWrite>
+  <div class="widget-container">
+    <h2 style="text-align: center;margin: 0;">Overwrite!</h2>
+    <h4>Are you sure?</h4>
+    <p>{{overWrite.message}}</p>
+    <div style="
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;">
+      <dx-button
+        width="150"
+        text="cancel"
+        (onClick)="overWrite.cancel($event)">
+      </dx-button>
+      <dx-button
+        width="150"
+        text="confirm"
+        (onClick)="overWrite.confirm($event)">
+      </dx-button>
+    </div>
+  </div>
+</ng-template>

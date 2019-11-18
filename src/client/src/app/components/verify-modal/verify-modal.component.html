@@ -1,0 +1,95 @@
+<app-simple-dialog-template (close)="Close()">
+        <span panel-title>
+            <span *ngIf="IDStep === 'split'">{{model.title}}</span>
+            <span *ngIf="IDStep === 'important'">Select Relevant Values</span>
+            <span *ngIf="IDStep === 'complete' && model.processed_id != ''">ID Formatting Already Completed</span>
+        </span>
+  <div style="width:100%;" panel-content>
+    <div class="alert alert-info" *ngIf="IDStep === 'newstring'">
+      <div class="loading-container">
+        <span class="fa fa-spinner fa-2x spinner"></span>
+      </div>
+    </div>
+    <div class="alert alert-info" *ngIf="IDStep === 'evaluating'">
+      <div class="loading-container">
+        <span class="fa fa-spinner fa-2x spinner"></span>
+      </div>
+    </div>
+    <div class="alert alert-info" *ngIf="IDStep === 'evaluationComplete'"> Complete!</div>
+
+    <div class="alert alert-info" *ngIf="IDStep === 'split'">{{model.message}}</div>
+    <div class="alert alert-info" *ngIf="IDStep === 'important'">We need your help to verify which values in the ID are
+      relevant and should be considered.
+      <div *ngIf="model.important_tokens">* Wildcard is used to mark parts of the ID that may not be fixed in size, for
+        example 09 and 010.
+      </div>
+    </div>
+    <div class="alert alert-success" *ngIf="IDStep === 'complete'">
+      <h1><i class="fa fa-check-circle-o fa-2x"></i></h1>
+      <span *ngIf="model.processed_id === ''">You have an ID format type that doesn't need to be configured.</span>
+      <span *ngIf="model.processed_id != ''">Your ID Format has already been configured.</span>
+    </div>
+    <!-- Content Section Displayed for user to set delimiter positions -->
+    <section *ngIf="IDStep === 'split'">
+      <div class="format-id">
+        <div class="token-parent"
+             *ngFor="let token of model.tokens; let i = index;">
+          <div class="token" *ngIf="token != '-'" id="{{i}}" [ngClass]="{'active': !token}">{{token}}
+            <button *ngIf="model.tokens[i+1] != '-'" class="divider-button" (click)="addDivider($event)">{{divider}}</button>
+          </div>
+          <div *ngIf="token === '-'" class="divider" id="{{i}}" (click)="removeDivider($event)">{{token}}</div>
+
+        </div> <!-- this works fine-->
+      </div>
+      <div class="ui-g step-buttons">
+        <button class="button button-primary" (click)="goToStep('important')">Save & Continue</button>
+      </div>
+    </section>
+
+    <!-- Content Section Displayed for user to select Important / Relevant Tokens -->
+    <section class="format-id" *ngIf="IDStep === 'important'">
+      <div class="token-parent split"
+           *ngFor="let token of model.tokens; let i = index;">
+        <div class="split-tokens" id="{{i}}">
+          <h2>{{token}}</h2>
+          <button class="button button-outline" (click)="selectRelevant($event, token)">Mark Relevant</button>
+          <div class="growth-tokens-radio" *ngIf="model.important_tokens">
+            <input type="radio" name="radio" id="radio-{{i}}" class="example-radio-button"
+                   [disabled]="!model.important_tokens.includes(i)" [(ngModel)]="growth_token_string"
+                   (change)="selectGrowthToken($event)" [value]="i"/>
+            <label for="radio-{{i}}">Mark as Wildcard *</label>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g step-buttons" style="margin-top:15px;">
+        <!-- ### Back button needs to somehow reset the tokens so each character is displayed as token again ###
+            <button class="button" class="button" (buttonPressed)="backToStep(1)"><info class="fa fa-chevron-left"></info> Back</button>
+        -->
+        <button class="button button-primary" (click)="evaluate()" [disabled]="!tokenSelected">Save & Continue</button>
+      </div>
+    </section>
+
+    <!-- Content Section Displayed for users returning to Re-Configure ID Format-->
+    <section *ngIf="IDStep === 'complete' && model.processed_id != ''" style="text-align:center; margin-bottom:30px;">
+      <label style="display:block;">Current ID Format: </label>
+      <div style="margin-bottom:15px;text-align:center;">
+        <div class="highlighted-id" [innerHTML]="processed_id_formatted"></div>
+      </div>
+      <a (click)="Restart()"><i class="fa fa-chevron-left"></i> Re-Configure your ID</a> | <a (click)="Realign()"><i
+      class="fa fa-chevron-left"></i> Re-Select Relevant Values</a>
+    </section>
+    <section *ngIf="!model.isPrimarySource && IDStep != 'complete'" class="primary-id-container">
+      <div class="primary-id">
+        <label>Example ID Format</label>
+        <h1>{{model.primaryToken}}</h1>
+      </div>
+    </section>
+
+    <div class="modal-footer">
+      <button mat-button style="float: right;" (click)="Close()">
+        <span *ngIf="IDStep != 'complete'">Cancel</span>
+        <span *ngIf="IDStep === 'complete'">OK</span>
+      </button>
+    </div>
+  </div>
+</app-simple-dialog-template>

@@ -1,0 +1,79 @@
+version: '2.4'
+services:
+  # UI
+  client:
+    container_name: client
+    image: client:latest
+    ports:
+      - 4200:4200
+
+  # Spring services
+  proxy:
+    container_name: proxy
+    image: proxy:latest
+    ports:
+      - 8080:8080
+    environment:
+      - environment=docker
+  integrator:
+    container_name: integrator
+    image: integrator:latest
+    ports:
+      - 8081:8081
+    environment:
+      - environment=docker
+  indexer:
+    container_name: indexer
+    image: indexer:latest
+    ports:
+      - 8082:8082
+    environment:
+      - environment=docker
+    volumes:
+      - ./logstash/pipelines_dir:/pipelines/
+
+
+
+  postgres:
+    container_name: db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=biocatalyst
+      - POSTGRES_USER=biocatalyst
+      - POSTGRES_PASSWORD=biocatalyst
+  elasticsearch:
+    container_name: es
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+
+  logstash:
+    restart: always
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:7.4.0
+    volumes:
+      - ./logstash/pipelines_local.yml:/usr/share/logstash/config/pipelines.yml
+      - ./logstash/pipelines_dir:/pipelines/
+      - ./logstash/postgresql-42.2.8.jar:/usr/share/logstash/logstash-core/lib/jars/postgresql-42.2.8.jar
+    environment:
+      - CONFIG_RELOAD_AUTOMATIC=true
+
+
+
+#WIP 
+
+# https://biobank.localdomain was created with: `docker run -it -v $(pwd):/ext-mount --rm unicon/shibboleth-idp init-idp.sh`. All pws are `biobank`
+#  shibboleth:
+#    container_name: shibb
+#    image: unicon/shibboleth-idp
+  # do some stuff
+
+#  openspecimen:
+#    container_name: openspecimen
+    #do stuff
+

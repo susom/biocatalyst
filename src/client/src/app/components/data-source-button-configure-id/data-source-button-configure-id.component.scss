@@ -1,0 +1,19 @@
+.format-id-section {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #f1f1f1;
+  background: #fafafa;
+
+  .button-link {
+    background: transparent;
+    color: #447BA7;
+    border: none;
+  }
+
+  small {
+    display: block;
+    color: #999;
+    font-size: 0.8rem;
+    margin: 5px auto 15px;
+  }
+}

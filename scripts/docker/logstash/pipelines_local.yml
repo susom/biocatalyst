@@ -1,0 +1,27 @@
+- pipeline.id: one
+  pipeline.workers: 1
+  pipeline.batch.size: 125 # default
+  pipeline.batch.delay: 50 # default, in ms
+  path.config: "/pipelines/pipeline1/logstash*.conf"
+  queue.type: persisted
+- pipeline.id: one-postprocessing
+  pipeline.workers: 1
+  path.config: "/pipelines/pipeline1/postprocessing*.conf"
+- pipeline.id: two
+  pipeline.workers: 1
+  pipeline.batch.size: 125 # default
+  pipeline.batch.delay: 50 # default, in ms
+  path.config: "/pipelines/pipeline2/logstash*.conf"
+  queue.type: persisted
+- pipeline.id: two-postprocessing
+  pipeline.workers: 1
+  path.config: "/pipelines/pipeline2/postprocessing*.conf"
+- pipeline.id: three
+  pipeline.workers: 1
+  pipeline.batch.size: 125 # default
+  pipeline.batch.delay: 50 # default, in ms
+  path.config: "/pipelines/pipeline3/logstash*.conf"
+  queue.type: persisted
+- pipeline.id: three-postprocessing
+  pipeline.workers: 1
+  path.config: "/pipelines/pipeline3/postprocessing*.conf"

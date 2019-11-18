@@ -1,0 +1,217 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Elasticsearch Local",
+		"_postman_id": "2b6b0ce8-8a36-e610-b4ca-7e87161b1944",
+		"description": "A collection of requests to:\n\n* Create the initial indexes required by the application `Initial Setup/{1,2,3}`\n* Create a test integration `Initial Setup{4,5,6}`\n* A few Utility calls useful when developing BioCatalyst `Util`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Initial Setup",
+			"description": "",
+			"item": [
+				{
+					"name": "1 - Create initial index - localstorage",
+					"request": {
+						"url": "http://admin:changeme@localhost:9200/localstorage",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mappings\":{\"doc\":{\"dynamic\":\"false\"}}}"
+						},
+						"description": "Create index where local storage (e.g. CSV data) will be stored"
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Create initial index - integrations",
+					"request": {
+						"url": "http://admin:changeme@localhost:9200/integrations",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mappings\":{\"doc\":{\"dynamic\":\"false\"}}}"
+						},
+						"description": "Create the index where integration configurations will live."
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Create initial index - reports",
+					"request": {
+						"url": "http://admin:changeme@localhost:9200/reports",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mappings\":{\"doc\":{\"dynamic\":\"false\"}}}"
+						},
+						"description": "Create the index where reports will live."
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Create test integration - (CSV/CSV)",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/integrations/doc/j99999999999999",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n        \"name\": \"local\",\n        \"_ids\": \"j99999999999999\",\n        \"dataSources\": [\n            {\n                \"source_id\": \"0\",\n                \"name\": \"Specimen Inventory Data\",\n                \"type\": \"CSV\",\n                \"connection_details\": {\n                    \"URL\": null,\n                    \"filename\": \"SLVP-TOKENS.csv\",\n                    \"headers\": [\n                        \"Identifier\",\n                        \"CP Short Title\",\n                        \"PPID\",\n                        \"Registration Date\",\n                        \"Activity Status\",\n                        \"First Name\",\n                        \"Last Name\",\n                        \"Middle Name\",\n                        \"Date Of Birth\",\n                        \"Death Date\",\n                        \"Gender\",\n                        \"Race#1\",\n                        \"Race#2\",\n                        \"Vital Status\",\n                        \"Ethnicity\",\n                        \"SSN\",\n                        \"eMPI\",\n                        \"PMI#1#Site Name\",\n                        \"PMI#1#MRN\",\n                        \"PMI#2#Site Name\",\n                        \"PMI#2#MRN\",\n                        \"Subject Registration Details#Sponsor-Provided Subject ID\"\n                    ],\n                    \"data\": \"AAAA-aaaaa111aaaaa-a\",\n                    \"credentials\": null\n                },\n                \"integration_details\": {\n                    \"subjectCode\": [\n                        {\n                            \"type\": \"ppid\",\n                            \"columnLabel\": \"Participant ID Column\",\n                            \"columnName\": \"PPID\",\n                            \"delimiter_positions\": [\n                                \"2\"\n                            ],\n                            \"important_tokens\": [\n                                \"0\",\n                                \"1\"\n                            ],\n                            \"important_tokens_order\": [\n                                \"0\",\n                                \"1\"\n                            ],\n                            \"growth_tokens\": [\n                                \"1\"\n                            ],\n                            \"processed_id\": \"15-001\",\n                            \"configurableColumn\": true,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        },\n                        {\n                            \"type\": \"mrn\",\n                            \"columnLabel\": \"Participant MRN Column\",\n                            \"columnName\": null,\n                            \"delimiter_positions\": [],\n                            \"important_tokens\": [],\n                            \"important_tokens_order\": [],\n                            \"growth_tokens\": [],\n                            \"processed_id\": null,\n                            \"configurableColumn\": false,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        }\n                    ],\n                    \"visitId\": [\n                        {\n                            \"type\": \"visitDate\",\n                            \"columnLabel\": \"Visit Date Column\",\n                            \"columnName\": null,\n                            \"delimiter_positions\": [],\n                            \"important_tokens\": [],\n                            \"important_tokens_order\": [],\n                            \"growth_tokens\": [],\n                            \"processed_id\": null,\n                            \"configurableColumn\": true,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        },\n                        {\n                            \"type\": \"visitCode\",\n                            \"columnLabel\": \"Visit Code Column\",\n                            \"columnName\": null,\n                            \"delimiter_positions\": [],\n                            \"important_tokens\": [],\n                            \"important_tokens_order\": [],\n                            \"growth_tokens\": [],\n                            \"processed_id\": null,\n                            \"configurableColumn\": false,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        },\n                        {\n                            \"type\": \"visitLabel\",\n                            \"columnLabel\": \"Visit Label Column\",\n                            \"columnName\": null,\n                            \"delimiter_positions\": [],\n                            \"important_tokens\": [],\n                            \"important_tokens_order\": [],\n                            \"growth_tokens\": [],\n                            \"processed_id\": null,\n                            \"configurableColumn\": false,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        },\n                        {\n                            \"type\": \"other\",\n                            \"columnLabel\": \"Other Visit Column\",\n                            \"columnName\": null,\n                            \"delimiter_positions\": [],\n                            \"important_tokens\": [],\n                            \"important_tokens_order\": [],\n                            \"growth_tokens\": [],\n                            \"processed_id\": null,\n                            \"configurableColumn\": false,\n                            \"configurableType\": false,\n                            \"removeable\": false\n                        }\n                    ],\n                    \"connections\": [\n                        {\n                            \"sourceId\": null,\n                            \"subjectCodeType\": null,\n                            \"visitId\": null,\n                            \"matching_strategy\": null\n                        }\n                    ]\n                },\n                \"matching_strategy\": null,\n                \"processed_id\": null,\n                \"deletable\": false,\n                \"valid\": true,\n                \"primary\": true\n            },\n            {\n                \"source_id\": \"1\",\n                \"name\": \"New Data Source\",\n                \"type\": \"CSV\",\n                \"connection_details\": {\n                    \"URL\": null,\n                    \"filename\": \"SLVP_two.csv\",\n                    \"headers\": [\n                        \"Identifier\",\n                        \"CP Short Title\",\n                        \"PPID\",\n                        \"Registration Date\",\n                        \"Activity Status\",\n                        \"First Name\",\n                        \"Last Name\",\n                        \"Middle Name\",\n                        \"Date Of Birth\",\n                        \"Death Date\",\n                        \"Gender\",\n                        \"Race#1\",\n                        \"Race#2\",\n                        \"Vital Status\",\n                        \"Ethnicity\",\n                        \"SSN\",\n                        \"eMPI\",\n                        \"PMI#1#Site Name\",\n                        \"PMI#1#MRN\",\n                        \"PMI#2#Site Name\",\n                        \"PMI#2#MRN\",\n                        \"Subject Registration Details#Sponsor-Provided Subject ID\"\n                    ],\n                    \"data\": \"BBB-bbbbb222bbbbb-b\",\n                    \"credentials\": null\n                },\n                \"integration_details\": {\n                    \"subjectCode\": [\n                        {\n                            \"type\": \"ppid\",\n                            \"columnLabel\": \"Participant ID Column\",\n                            \"columnName\": \"PPID\",\n                            \"delimiter_positions\": [\n                                \"2\",\n                                \"5\"\n                            ],\n                            \"important_tokens\": [\n                                \"0\",\n                                \"1\"\n                            ],\n                            \"important_tokens_order\": [\n                                \"0\",\n                                \"1\"\n                            ],\n                            \"growth_tokens\": [\n                                \"1\"\n                            ],\n                            \"processed_id\": \"15-008-AAA\",\n                            \"configurableColumn\": true,\n                            \"configurableType\": true,\n                            \"removeable\": false\n                        }\n                    ],\n                    \"visitId\": [],\n                    \"connections\": [\n                        {\n                            \"sourceId\": \"0\",\n                            \"subjectCodeType\": \"ppid\",\n                            \"visitId\": null,\n                            \"matching_strategy\": null\n                        }\n                    ]\n                },\n                \"matching_strategy\": null,\n                \"processed_id\": null,\n                \"deletable\": true,\n                \"valid\": true,\n                \"primary\": false\n            }\n        ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Upload source 0 (primary) CSV data",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/localstorage/doc/AAAA-aaaaa111aaaaa-a",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": {\n      \"rows\": [\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"12-27-1990\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Carly\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"0\",\n          \"Last Name\": \"Girl\",\n          \"Middle Name\": \"Spider\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-001\",\n          \"Race#1\": \"Black or African American\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"03-09-2006\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"07-17-1989\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Deirdre\",\n          \"Gender\": \"Female\",\n          \"Identifier\": \"1\",\n          \"Last Name\": \"Person\",\n          \"Middle Name\": \"Super\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-002\",\n          \"Race#1\": \"Asian\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"09-17-2007\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"03-17-1981\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Lanelle\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"2\",\n          \"Last Name\": \"Man\",\n          \"Middle Name\": \"Aqua\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-003\",\n          \"Race#1\": \"Asian\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"11-24-2003\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"03-24-1994\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Spider\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"3\",\n          \"Last Name\": \"American\",\n          \"Middle Name\": \"Red\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-004\",\n          \"Race#1\": \"Black or African American\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"08-04-2010\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"08-08-1973\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Blue\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"4\",\n          \"Last Name\": \"Person\",\n          \"Middle Name\": \"Blue\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-005\",\n          \"Race#1\": \"Black or African American\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"11-20-2010\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"01-05-1978\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Red\",\n          \"Gender\": \"Female\",\n          \"Identifier\": \"5\",\n          \"Last Name\": \"Person\",\n          \"Middle Name\": \"Wonder\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-006\",\n          \"Race#1\": \"American Indian or Alaska Native\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"08-04-2005\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"11-15-1974\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Donte\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"6\",\n          \"Last Name\": \"Sapien\",\n          \"Middle Name\": \"Wonder\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-007\",\n          \"Race#1\": \"American Indian or Alaska Native\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"11-12-2011\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"09-04-1985\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Angella\",\n          \"Gender\": \"Male\",\n          \"Identifier\": \"7\",\n          \"Last Name\": \"Human\",\n          \"Middle Name\": \"Aqua\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-008\",\n          \"Race#1\": \"Not Reported\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"09-18-2002\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"01-04-1971\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Remedios\",\n          \"Gender\": \"Female\",\n          \"Identifier\": \"8\",\n          \"Last Name\": \"Girl\",\n          \"Middle Name\": \"Super\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-009\",\n          \"Race#1\": \"American Indian or Alaska Native\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"07-14-2012\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"01-24-1987\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Spider\",\n          \"Gender\": \"Female\",\n          \"Identifier\": \"9\",\n          \"Last Name\": \"Girl\",\n          \"Middle Name\": \"Blue\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-010\",\n          \"Race#1\": \"Unknown\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"01-04-2013\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        },\n        {\n          \"Activity Status\": \"\",\n          \"CP Short Title\": \"SLVP TMF\",\n          \"Date Of Birth\": \"02-26-1999\",\n          \"Death Date\": \"\",\n          \"eMPI\": \"\",\n          \"Ethnicity\": \"\",\n          \"First Name\": \"Annetta\",\n          \"Gender\": \"Female\",\n          \"Identifier\": \"10\",\n          \"Last Name\": \"Boy\",\n          \"Middle Name\": \"Super\",\n          \"PMI#1#MRN\": \"\",\n          \"PMI#1#Site Name\": \"\",\n          \"PMI#2#MRN\": \"\",\n          \"PMI#2#Site Name\": \"\",\n          \"PPID\": \"15-011\",\n          \"Race#1\": \"Not Reported\",\n          \"Race#2\": \"\",\n          \"Registration Date\": \"06-18-2001\",\n          \"SSN\": \"\",\n          \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\",\n          \"Vital Status\": \"\"\n        }\n      ]\n    },\n    \"type\": \"csv\"\n  }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Upload source 1 (non-primary) CSV data",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/localstorage/doc/BBB-bbbbb222bbbbb-b",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \n      \"type\": \"csv\",\n      \"data\": {\n        \"rows\": [\n          {\n            \"Identifier\": \"8\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-008-AAA\",\n            \"Registration Date\": \"09-18-2002\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Angella\",\n            \"Last Name\": \"Human\",\n            \"Middle Name\": \"Aqua\",\n            \"Date Of Birth\": \"09-04-1985\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Male\",\n            \"Race#1\": \"Not Reported\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          },\n          {\n            \"Identifier\": \"9\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-009-AAA\",\n            \"Registration Date\": \"07-14-2012\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Remedios\",\n            \"Last Name\": \"Girl\",\n            \"Middle Name\": \"Super\",\n            \"Date Of Birth\": \"01-04-1971\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Female\",\n            \"Race#1\": \"American Indian or Alaska Native\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          },\n          {\n            \"Identifier\": \"10\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-010-AAA\",\n            \"Registration Date\": \"01-04-2013\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Spider\",\n            \"Last Name\": \"Girl\",\n            \"Middle Name\": \"Blue\",\n            \"Date Of Birth\": \"01-24-1987\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Female\",\n            \"Race#1\": \"Unknown\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          },\n          {\n            \"Identifier\": \"11\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-011-AAA\",\n            \"Registration Date\": \"06-18-2001\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Annetta\",\n            \"Last Name\": \"Boy\",\n            \"Middle Name\": \"Super\",\n            \"Date Of Birth\": \"02-26-1999\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Female\",\n            \"Race#1\": \"Not Reported\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          },\n          {\n            \"Identifier\": \"110\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-110-AAA\",\n            \"Registration Date\": \"06-18-2001\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Annetta\",\n            \"Last Name\": \"Boy\",\n            \"Middle Name\": \"Super\",\n            \"Date Of Birth\": \"02-26-1999\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Female\",\n            \"Race#1\": \"Not Reported\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          },\n          {\n            \"Identifier\": \"107\",\n            \"CP Short Title\": \"SLVP TMF\",\n            \"PPID\": \"15-107-AAA\",\n            \"Registration Date\": \"06-18-2001\",\n            \"Activity Status\": \"\",\n            \"First Name\": \"Annetta\",\n            \"Last Name\": \"Boy\",\n            \"Middle Name\": \"Super\",\n            \"Date Of Birth\": \"02-26-1999\",\n            \"Death Date\": \"\",\n            \"Gender\": \"Female\",\n            \"Race#1\": \"Not Reported\",\n            \"Race#2\": \"\",\n            \"Vital Status\": \"\",\n            \"Ethnicity\": \"\",\n            \"SSN\": \"\",\n            \"eMPI\": \"\",\n            \"PMI#1#Site Name\": \"\",\n            \"PMI#1#MRN\": \"\",\n            \"PMI#2#Site Name\": \"\",\n            \"PMI#2#MRN\": \"\",\n            \"Subject Registration Details#Sponsor-Provided Subject ID\": \"\"\n          }\n        ]\n      }\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Util",
+			"description": "",
+			"item": [
+				{
+					"name": "Get ES config",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/integrations/doc/j99999999999999",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ES config",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/integrations/doc/j99999999999999",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "See all configurations",
+					"request": {
+						"url": "",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Can be useful to view your config ids to fix if the proxy is complaining."
+					},
+					"response": []
+				},
+				{
+					"name": "Get number of objects in an index",
+					"request": {
+						"url": "http://elastic:changeme@localhost:9200/j99999999999999/_count",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "How many rows are present in a resultant data set. Requires an integration has been run."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

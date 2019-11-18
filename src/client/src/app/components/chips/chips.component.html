@@ -1,0 +1,8 @@
+<mat-chip-list>
+  <div *ngFor="let header of Headers">
+    <mat-chip class="chips" *ngIf="header.Filter" (click)="ClearHeader(header)">
+      <span class="chips-label">{{RemoveSource(header)}} = {{Filter(header)}}</span>
+      <span class="chips-delete fa fa-trash"></span>
+    </mat-chip>
+  </div>
+</mat-chip-list>

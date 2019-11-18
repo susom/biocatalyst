@@ -1,0 +1,463 @@
+*, html, body {
+  touch-action: none;
+}
+
+:host {
+  width: 100%;
+}
+
+.informer-bold {
+  font-weight: bold;
+}
+
+.table-legend {
+  position: fixed;
+  bottom: 5px;
+  right: 50%;
+  width: 500px;
+  margin-right: -330px;
+  text-align: center;
+  padding: 15px;
+  z-index: 9;
+
+  .table-legend-item {
+    color: #333;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin-right: 10px;
+
+    strong {
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+::ng-deep {
+  #gridContainer {
+    height: 90vh;
+    height: calc(100vh - 45px);
+  }
+
+  //Alert message when data grid empty
+  .dx-datagrid-nodata {
+    padding: 15px;
+    background: #ECF7FF;
+    color: #447BA7;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.1);
+
+    &:before {
+      font-family: 'FontAwesome';
+      content: "\f071";
+      margin-right: 15px;
+    }
+  }
+
+  //Toolbar buttons
+  .dx-button-text {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #447BA7;
+  }
+
+  .dx-button-has-icon.dx-button-has-text {
+    //Hide Save/Visualize button text on smaller screens to free up space
+    .dx-button-content {
+      .dx-icon {
+        margin-right: 0;
+      }
+
+      .dx-button-text {
+        display: none;
+      }
+
+      @media screen and (min-width: 1500px) {
+        .dx-icon {
+          margin-right: 9px;
+        }
+        .dx-button-text {
+          display: inline-block;
+        }
+      }
+    }
+
+    //Style just save button
+    &[aria-label="Save"] {
+      background-color: #447BA7;
+      border-color: #447BA7;
+
+      &:hover {
+        background-color: #3c6c92;
+      }
+
+      .dx-button-content {
+        .dx-icon, .dx-button-text {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  //Table cells
+  .dx-datagrid .dx-row > td {
+    padding: 10px;
+  }
+
+  //Column headers
+  .dx-datagrid-headers {
+    color: #666;
+    font-weight: bold;
+  }
+
+  .dx-datagrid .dx-header-filter {
+    color: #447BA7;
+  }
+
+  .dx-datagrid .dx-header-filter-empty {
+    color: #ddd;
+    transition: all 0.3s;
+
+    .dx-header-filter-indicator {
+      color: #447BA7;
+    }
+  }
+
+  //Highlight styles for column header dataSources
+  [class*="highlight-"] {
+    font-weight: bold;
+  }
+
+  .highlight-1 {
+    background: #e5f2fc !important;
+    font-weight: bold;
+    color: #447BA7; //blue
+  }
+
+  .highlight-2 {
+    background: #FFEDEF !important;
+    color: #DA626A; //red
+  }
+
+  .highlight-3 {
+    background: #F4FFE9 !important;
+    color: #6CB917; //green
+  }
+
+  .highlight-4 {
+    background: #FCF6E5 !important;
+    color: #E2A43E; //orange
+  }
+
+  .highlight-5 {
+    background: #FDEAFF !important;
+    color: #9D60D4; //purple
+  }
+
+  //Integration & Report Dropdown container
+  .dx-toolbar-item-content {
+    width: 100%;
+  }
+
+  .dx-selectbox.dx-texteditor {
+    float: left;
+  }
+
+  //Pagination Styling
+  .dx-datagrid-pager {
+    border-top: none;
+  }
+
+  .dx-pager {
+    padding: 15px;
+  }
+
+  .dx-pager .dx-pages .dx-selection, .dx-pager .dx-page-sizes .dx-selection {
+    background-color: #F6F6F6;
+    color: #447BA7;
+    font-weight: bold;
+  }
+
+  .dx-pager .dx-pages .dx-page, .dx-pager .dx-page-sizes .dx-page-size {
+    color: #666;
+  }
+
+  //Integration dropdown
+  .dx-toolbar-before .dx-toolbar-button:first-of-type .dx-texteditor {
+    border: 1px solid #447BA7;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+
+    input {
+      font-weight: bold;
+    }
+  }
+
+  .dx-datagrid-header-panel {
+    padding: 0 0 15px 0;
+
+    .dx-toolbar {
+      margin-bottom: 0;
+    }
+
+    .dx-toolbar-items-container {
+      display: flex;
+      flex-wrap: wrap;
+      height: auto;
+      min-height: 36px;
+
+      .dx-toolbar-before {
+        position: relative;
+        min-width: 600px;
+        padding: 15px 15px 0 15px;
+        box-sizing: border-box;
+        display: flex;
+        position: relative;
+        order: 1;
+      }
+
+      .dx-toolbar-after {
+        position: relative;
+        flex: 1;
+        min-width: 400px;
+        padding: 15px 15px 0 15px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+        order: 2;
+
+        .dx-toolbar-item {
+          display: flex;
+          align-items: center;
+          width: auto;
+        }
+      }
+
+      .dx-toolbar-center {
+        margin: 0 !important;
+        width: 100%;
+        display: block;
+        order: 3; //displays this last since it contains filter labels
+        //Filter labels/badges
+        .mat-chip-list-wrapper {
+          margin: 0 0 0 15px;
+
+          .mat-standard-chip {
+            margin: 15px 5px 0 0;
+            color: #fff;
+            padding: 5px 10px;
+            line-height: 18px;
+            min-height: 28px;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .dx-popup-title.dx-toolbar .dx-toolbar-before {
+    width: 80%;
+  }
+}
+
+::ng-deep .left-filters {
+  background: #F6F6F6;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
+  height: 100vh;
+  height: calc(100vh - 45px);
+  position: fixed;
+  top: 45px;
+  left: 0;
+  width: 300px;
+  z-index: 9;
+  transition: all 0.3s;
+  //Filters slide up to top of screen once user scrolls below navbar
+  &.top {
+    top: 0px;
+
+    .dx-scrollable-native.dx-scrollable-native-generic {
+      padding-bottom: 15px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .filter-heading {
+    padding: 15px 10px;
+    border-bottom: 1px solid #f1f1f1;
+    position: relative;
+
+    .btn-link {
+      line-height: 15px;
+      font-size: 1.3rem;
+      display: inline-block;
+      position: absolute;
+      top: 17px;
+      right: 5px;
+      outline: none;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    h3 {
+      font-weight: 400;
+      letter-spacing: -1px;
+      font-size: 1.3rem;
+      margin: 0;
+      visibility: visible;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+  }
+
+  .dx-list-select-all {
+    font-weight: bold;
+    border-top: none;
+    padding: 15px 5px;
+  }
+
+  .dx-list-group {
+    .dx-list-group-header {
+      padding: 0;
+      border-bottom: 1px solid #ddd;
+
+      &:before {
+        opacity: 0.5;
+        margin-top: 19px;
+        margin-right: 15px;
+      }
+
+      .group-header > div {
+        padding: 12px 15px;
+        text-transform: uppercase;
+        font-size: 0.9em;
+      }
+
+      &:hover {
+        &:before {
+          opacity: 1.0;
+        }
+      }
+    }
+  }
+
+  .dx-list-item {
+    box-sizing: border-box;
+    color: #999;
+    border-top: 1px solid #f1f1f1;
+    padding: 2px 5px;
+    transition: all 0.3s;
+    font-size: 14px;
+
+    &:hover {
+      color: #666;
+    }
+
+    &.dx-list-item-selected {
+      color: #447BA7;
+      border-left: 3px solid #447BA7;
+      background: #f9f9f9;
+    }
+
+    .dx-list-item-content {
+      padding-left: 15px;
+    }
+  }
+
+  .dx-scrollable-native.dx-scrollable-native-generic {
+    padding-bottom: 60px;
+  }
+
+  //Collapsed closed left filters
+  &.collapsed {
+    box-shadow: none;
+    width: 0px;
+
+    .filter-heading {
+      h3 {
+        visibility: hidden;
+        opacity: 0;
+        margin-left: -500px;
+      }
+
+      .btn-link {
+        top: 10px;
+        right: -5px;
+        padding: 15px 10px;
+        background: #447BA7;
+        color: #fff;
+        border-radius: 8px;
+        box-shadow: 1px 3px 18px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .dx-scrollable-native.dx-scrollable-native-generic {
+      padding: 0;
+      display: none;
+    }
+  }
+
+  .dx-checkbox-checked .dx-checkbox-icon {
+    color: #447BA7;
+  }
+}
+
+::ng-deep .body-content {
+  width: calc(100% - 300px);
+  float: right;
+
+  &.collapsed {
+    width: 100%;
+
+    .dx-datagrid-header-panel {
+      padding-left: 30px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}

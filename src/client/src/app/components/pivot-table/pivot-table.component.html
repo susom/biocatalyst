@@ -1,0 +1,124 @@
+<div class="ui-g chart-container">
+  <div class="ui-g-3 left-filters">
+    <h3 class="filter-heading">Visualization Field Chooser</h3>
+    <dx-pivot-grid-field-chooser
+      [dataSource]="pivotGridDataSource"
+      [layout]="0"
+      [(state)]="state">
+
+      <dxo-texts allFields="All"
+                 columnFields="Columns"
+                 dataFields="Data"
+                 rowFields="Rows"
+                 filterFields="Filter">
+      </dxo-texts>
+    </dx-pivot-grid-field-chooser>
+  </div>
+  <div class="ui-g-9 right-body">
+    <div class="chart-container-header">
+      <div class="column column-one">
+        <a href="#/data-collection" class="btn-link"><i class="fa fa-chevron-left"></i> Data Collection</a>
+        <!-- Title is not defined in the component. Leaving here in case it
+          is needed for some reaseon.
+        <label class="header-label">{{ title }}</label>
+        -->
+
+        <form class="input-select-wrap">
+          <select placeholder="Chart Type" value="1" class="input-select">
+            <option value="1">Pivot Grid + Table</option>
+            <!--
+                (buttonPressed)="showChart('Pivot')"
+                Removed the above from option as the function doesn't exist in the component.
+            -->
+            <!--<option value="3" (buttonPressed)="showChart('Pie')">Pie Chart</option>-->
+          </select>
+          <i class="fa fa-caret-down"></i>
+        </form>
+      </div>
+      <div class="column column-two" style="text-align:right;" id="buttonGroup">
+        <dx-button
+          class="row-element"
+          icon="print"
+          text="Print"
+          id="printBtn"
+          (click)="togglePrint()">
+        </dx-button>
+        <dx-button
+          class="row-element"
+          icon="export"
+          text="Export"
+          id="exportBtn"
+          (click)="toggleExport()">
+        </dx-button>
+        <!--<dx-button
+          class="row-element"
+          icon="save"
+          text="Save"
+          (buttonPressed)="save()">
+        </dx-button>-->
+        <dx-popover
+          target="#exportBtn"
+          position="bottom"
+          [width]="200"
+          [(visible)]="exportVisible">
+          <div *dxTemplate="let data = model of 'content'">
+            <button class="btn btn-link btn-block" (click)="toggleExport()">PDF</button>
+            <button class="btn btn-link btn-block" (click)="toggleExport()">Excel</button>
+            <button class="btn btn-link btn-block" (click)="toggleExport()">R</button>
+            <button class="btn btn-link btn-block" (click)="toggleExport()">Zip</button>
+          </div>
+        </dx-popover>
+        <dx-popover
+          target="#printBtn"
+          position="bottom"
+          [width]="300"
+          [(visible)]="printVisible">
+          <div *dxTemplate="let data = model of 'content'">
+            <button class="btn btn-link btn-block" (click)="print('chart')"><i class="fa fa-bar-chart"></i> Chart
+            </button>
+            <button class="btn btn-link btn-block" (click)="print('both')"><i class="fa fa-bar-chart"></i> + <i
+              class="fa fa-table"></i> Chart + Pivot Table
+            </button>
+          </div>
+        </dx-popover>
+      </div>
+    </div>
+
+    <div class="chart-container-content">
+      <p *ngIf="isLoading; else Loaded" style="text-align: center;">
+        Loading...
+      </p>
+      <ng-template #Loaded>
+        <h3 style="text-align: center;">
+          {{selectedData.length}} Results Found
+        </h3>
+      </ng-template>
+      <div id="pivotgrid-demo">
+        <dx-chart id="pivot-chart">
+          <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+          <dxo-argument-axis> <!-- or dxi-value-axis, or dxo-common-axis-settings -->
+            <dxo-label
+              overlappingBehavior="rotate"
+              [rotationAngle]="45">
+            </dxo-label>
+          </dxo-argument-axis>
+          <dxo-size [height]="350"></dxo-size>
+          <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
+        </dx-chart>
+        <dx-pivot-grid id="pivotgrid"
+                       [allowSortingBySummary]="true"
+                       [showBorders]="true"
+                       [showColumnGrandTotals]="false"
+                       [showRowGrandTotals]="false"
+                       [showRowTotals]="false"
+                       [showColumnTotals]="false"
+                       [dataSource]="pivotGridDataSource">
+          <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+          <dxo-scrolling mode="virtual"></dxo-scrolling>
+          <dxo-export [enabled]="true" fileName="PivotGrid" [allowExportSelectedData]="true"></dxo-export>
+        </dx-pivot-grid>
+      </div>
+    </div>
+  </div>
+</div>
+

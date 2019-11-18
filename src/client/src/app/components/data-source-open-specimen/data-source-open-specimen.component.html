@@ -1,0 +1,40 @@
+<app-data-source-template-form
+  #dataSource
+  [dataSource]="oSource$ | async"
+  (dataSourceChange)="TriggerChange($event)"
+>
+
+  <div panel-notice>
+    <div class="alert alert-info">
+      <i class="fa fa-info-circle"></i> You can integrate specimen data with research data, to enable a universal
+      search.
+    </div>
+  </div>
+
+  <div panel-connectiondetails>
+    <app-open-specimen-protocol-selector [selection]="CPID$ | async " (onChange)="CPID.next($event)">
+    </app-open-specimen-protocol-selector>
+    <mat-error *ngIf="!source.valid" style="margin-top:5px;font-size:0.9em;">
+      <i class="fa fa-exclamation-circle"></i> Required
+    </mat-error>
+  </div>
+
+  <div panel-footer>
+    <div class="format-id-section">
+      <app-data-source-button-configure-id
+        (buttonPressed)="dataSource.launchVerifyModal(tokenInstruction);"
+        [formatIDRequired]="!checkTokenProcessed()"
+        [disabled]="!source.valid"
+      ></app-data-source-button-configure-id>
+      <small><i class="fa fa-info-circle"></i> To help accurately connect multiple data sources we need help aligning
+        relevant ID’s across them.</small>
+    </div>
+  </div>
+
+</app-data-source-template-form>
+
+
+
+
+
+

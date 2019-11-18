@@ -1,0 +1,13 @@
+<div class="Title" style="display: inline-block;" *ngIf="!editing" (click)="onClick()">
+  {{text}}
+  <i *ngIf="editable" style="font-size: medium;color: #1f9ece" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</div>
+<input *ngIf="editable && editing"
+       [focus]
+       (keyup)="inputKeyup($event)"
+       (focusout)="stopEditing()"
+       style="text-align: center;"
+       type="text"
+       pInputText
+       size="32"
+       [(ngModel)]="text">

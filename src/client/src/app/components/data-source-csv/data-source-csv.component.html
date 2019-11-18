@@ -1,0 +1,26 @@
+<app-data-source-template-form
+  [integration]="integration"
+  [(dataSource)]="dataSource"
+  (dataSourceChange)="dataSourceChange.emit($event)"
+  [dataSources]="dataSources"
+  [defaultOptions]="options">
+
+  <div panel-notice></div>
+
+  <div panel-connectiondetails style="overflow:hidden;">
+    <app-csv-upload-table
+      [fileData]="preview.data"
+      [fileHeaders]="preview.headers"
+      (fileUploaded)="onFileUploaded($event)"></app-csv-upload-table>
+  </div>
+
+  <div panel-footer></div>
+
+</app-data-source-template-form>
+
+
+
+
+
+
+

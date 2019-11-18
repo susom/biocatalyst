@@ -1,0 +1,8 @@
+<button
+  class="button button-primary"
+  (click)="buttonPressed.emit($event)"
+  [disabled]="disabled"
+  [ngClass]="formatIDRequired ? '' : 'complete'">
+  <span *ngIf="formatIDRequired">Configure ID Format</span>
+  <span *ngIf="!formatIDRequired"><i class="fa fa-check"></i> ID Format Configured</span>
+</button>

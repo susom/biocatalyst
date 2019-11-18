@@ -1,0 +1,16 @@
+<dx-select-box
+  [dataSource]="integrations"
+  [value]="integration?._ids"
+  (onSelectionChanged)="onIntegrationChange($event)"
+  displayExpr="name"
+  valueExpr="_ids"
+  class="study-selector"
+  [width]="260">
+</dx-select-box>
+
+<app-report-selector
+  [integration]="integration"
+  [reports]="reports"
+  [report]="report"
+  (reportChange)="onReportChange($event)">
+</app-report-selector>

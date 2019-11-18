@@ -1,0 +1,57 @@
+<app-data-source-template-form
+  [dataSource]="oSource$ | async"
+  [dataSources]="sources"
+  [defaultOptions]="ProjectReportColumns$ | async"
+  (dataSourceChange)="TriggerChange($event)"
+>
+
+  <div panel-notice>
+    <div class="alert alert-info">
+      <i class="fa fa-info"></i>
+      <span *ngIf="source.primary">
+        Once you have generated a specimen report in REDCap, you can specify here the report attributes, to make your report searchable and to enable integrating additional data sources with your specimen report data
+      </span>
+      <span *ngIf="!source.primary">
+        Once you have generated a REDCap report in REDCap, you can specify here the report attributes that would enable integrating the report data with the specimen data.
+      </span>
+    </div>
+  </div>
+
+  <div panel-connectiondetails>
+    <span [ngSwitch]="ProjectListStatus$ | async">
+      <span *ngSwitchCase="urlrequeststateenum.Default" mat-raised-button>
+      </span>
+      <span *ngSwitchCase="urlrequeststateenum.Requesting" mat-raised-button>
+        <p>Fetching Projects</p>
+      </span>
+      <span *ngSwitchCase="urlrequeststateenum.Returned" [@customFade]="'in'" mat-raised-button>
+        <div *ngFor="let layout of connectionDetailsColumnDropdownLayout">
+          <app-column-selector-dropdown
+            class="{{layout?.scssSpacing}}"
+            [label]="layout?.details?.label"
+            [defaultvalue]="layout?.details?.defaultValue"
+            [columns]="layout?.details?.columns"
+            (onSelection)="layout?.details?.onSelection($event)">
+          </app-column-selector-dropdown>
+          <app-column-selector-dropdown
+            *ngIf="layout?.type"
+            class="{{layout?.scssSpacing}}"
+            [label]="layout?.type?.label"
+            [defaultvalue]="layout?.type?.defaultValue"
+            [columns]="layout?.details?.columns"
+            (onSelection)="layout?.type?.onSelection($event)">
+          </app-column-selector-dropdown>
+          <div *ngIf="layout?.configureColumn" class="{{layout?.scssSpacing}}">
+            <button
+              [disabled]="layout.disableColumnConfiguration"
+              (click)="configureSubjectID(layout)"
+              class="button button-outline">
+              <span>Configure Participant ID</span>
+            </button>
+          </div>
+        </div>
+      </span>
+    </span>
+  </div>
+
+</app-data-source-template-form>

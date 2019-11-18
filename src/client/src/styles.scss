@@ -1,0 +1,145 @@
+/* Prime NG */
+@import '../node_modules/primeicons/primeicons.css';
+@import '../node_modules/primeng/resources/primeng.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+@font-face {
+  font-family: Crimson;
+  src: url(assets/fonts/CrimsonText-Roman.ttf);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height:100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height:100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.mat-progress-circle path,
+.mat-progress-spinner path,
+.mat-spinner path {
+  stroke: #2968a2;
+}
+
+.mat-dialog-container {
+  background-color: whitesmoke;
+}
+
+.mat-autocomplete-panel {
+  max-height: 220px !important;
+}
+
+/* Button style based off DX Button */
+.button {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  max-width: 100%;
+  outline: 0;
+  line-height: 1.35715;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #fff;
+  border-color: #ddd;
+  color: #333;
+  padding: 7px 18px 8px;
+  font-size: 14px;
+}
+
+.button:hover, .button:focus {
+  background-color: #e6e6e6;
+  border-color: #ddd;
+}
+
+.button-primary {
+  background-color: #447ba7; /*Primary*/
+  color: #fff;
+  box-shadow: 1px 3px 14px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
+  font-weight: bold;
+}
+
+.button-primary:hover, .button-primary:focus {
+  background-color: #3A6D96;
+  box-shadow: none;
+}
+
+.button-primary.complete {
+  background: #00725F;
+  border-color: transparent;
+  font-weight: bold;
+  color: #fff;
+}
+
+.button-primary.complete:hover, .button-primary.complete:focus {
+  background: rgb(0, 99, 82);
+}
+
+.button-primary.error {
+  background-color: #f44336;
+  color: #fff;
+  border-color: transparent;
+}
+
+.button-primary.error:hover, .button-primary.error:focus {
+  background-color: #DC392D;
+}
+
+.button:disabled, .button-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.button-outline {
+  background: transparent;
+  color: #447ba7;
+  border: 1px solid #447ba7;
+  box-shadow: none;
+  transition: all 0.3s;
+}
+
+.button-outline:hover {
+  color: #fff;
+  background: #447ba7;
+}
+
+.button-outline.complete {
+  background: transparent;
+  border: 2px solid #00725F;
+  font-weight: bold;
+  color: #00725F;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spinner .6s linear infinite;
+}
+
+.ui-g-1, .ui-g-2, .ui-g-3, .ui-g-4, .ui-g-5, .ui-g-6, .ui-g-7, .ui-g-8, .ui-g-9, .ui-g-10, .ui-g-11, .ui-g-12 {
+  padding: 0 !important;
+}

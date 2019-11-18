@@ -1,0 +1,21 @@
+<form
+  *ngIf="myForm"
+  [formGroup]="myForm"
+  (submit)="onSubmit()"
+  style="
+		display: block;
+		width:70%;
+		margin:0 auto;
+	"
+>
+
+  <div class="search-container" dividerColor="accent">
+    <h1>Search your Integrations</h1>
+    <div class="searchbar-wrap">
+      <input class="searchbar" placeholder="PPID, Date, Study, or other values..." formControlName="search">
+      <i class="fa fa-search"></i>
+    </div>
+  </div>
+</form>
+
+<router-outlet name="search"></router-outlet>

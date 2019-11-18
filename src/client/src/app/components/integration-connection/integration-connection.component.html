@@ -1,0 +1,67 @@
+<div class="ui-g">
+  <!-- Commenting out till we enable column based configurations -->
+  <div class="ui-g-6">
+    <label class="label">Connect:</label>
+    <app-column-selector-dropdown
+      [label]="participantID?.label"
+      [enableEmptyOption]="false"
+      [defaultvalue]="participantID?.defaultValue"
+      [columns]="participantID?.columns"
+      (onSelection)="participantID?.onSelection($event)">
+    </app-column-selector-dropdown>
+  </div>
+
+  <div class="ui-g-6" [ngSwitch]="SelectedSubjectType$ | async">
+    <!-- Visit Date -->
+    <span *ngSwitchCase="'mrn'">
+          <label class="label">as mrn to:</label>
+        </span>
+    <span *ngSwitchCase="'ppid'">
+          <label class="label">as ppid to:</label>
+        </span>
+    <div *ngSwitchDefault></div>
+    <app-column-selector-dropdown
+      *ngIf="SelectedSubjectType$ | async"
+      [label]="sourceID?.label"
+      [enableEmptyOption]="false"
+      [defaultvalue]="sourceID?.defaultValue"
+      [columns]="sourceID?.columns"
+      (onSelection)="sourceID?.onSelection($event)">
+    </app-column-selector-dropdown>
+  </div>
+</div>
+<div class="ui-g" *ngIf="VisitTokenInstructionCount > 0">
+  <div class="ui-g-6">
+    <label class="label">with:</label>
+    <app-column-selector-dropdown
+      [label]="visitID?.label"
+      [enableEmptyOption]="false"
+      [defaultvalue]="visitID?.defaultValue"
+      [columns]="visitID?.columns"
+      (onSelection)="visitID?.onSelection($event)">
+    </app-column-selector-dropdown>
+  </div>
+  <div class="ui-g-6" [ngSwitch]="SelectedConnectionType$ | async">
+
+    <div *ngSwitchCase="IVISITIDTYPES.visitDate">
+      <span matSuffix>&plusmn;&nbsp; {{dateMatchingRangeInDays()}} days</span>
+    </div>
+
+
+    <div>
+      <!-- Visit Code -->
+      <label *ngSwitchCase="IVISITIDTYPES.visitCode" class="label">as a visit code</label>
+      <!-- Visit Label -->
+      <label class="label" *ngSwitchCase="IVISITIDTYPES.visitLabel">as a visit label</label>
+      <!-- Visit Mapping -->
+      <label class="label" *ngSwitchCase="IVISITIDTYPES.other">and a mapping</label>
+    </div>
+    <div *ngSwitchDefault></div>
+  </div>
+
+</div>
+
+
+
+
+

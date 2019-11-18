@@ -1,0 +1,42 @@
+<div class="form" class="ui-g-12">
+  <dx-drop-down-box
+    style="min-width: 300px; display: inline-block;"
+    [(opened)]="isDropDownBoxOpened"
+    [(value)]="field"
+    valueExpr="id"
+    displayExpr="display"
+    placeholder="Select a field..."
+    [showClearButton]="true"
+    [dataSource]="selectedData">
+    <dxo-drop-down-options [height]="ddwHeight"></dxo-drop-down-options>
+    <div *dxTemplate="let data of 'content'">
+      <dx-tree-view
+        [dataSource]="hierarchicalData"
+        dataStructure="tree"
+        keyExpr="id"
+        displayExpr="display"
+        selectionMode="single"
+        [selectByClick]="true"
+        (onContentReady)="$event.component.selectItem(field)"
+        (onItemSelectionChanged)="treeView_itemSelectionChanged($event)">
+      </dx-tree-view>
+    </div>
+  </dx-drop-down-box>
+  <dx-select-box
+    style="min-width: 100px; display: inline-block;"
+    [items]="Operators"
+    [(value)]="Operators[0]"></dx-select-box>
+  <dx-select-box
+    #query
+    style="min-width: 100px; display: inline-block;"
+    [items]="suggestions"
+    [showClearButton]="true"
+    placeholder="Value..."
+    [(value)]="fitlerValue"
+    [searchEnabled]="true"
+    (focusIn)="onFilterInput(query.text)"
+    (input)="onFilterInput(query.text)"></dx-select-box>
+</div>
+<div class="ui-g-12" style="text-align: center;">
+  <button mat-raised-button style="color: #447ba7" (click)="apply()">Apply</button>
+</div>

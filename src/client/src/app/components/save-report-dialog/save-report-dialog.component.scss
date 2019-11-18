@@ -1,0 +1,9 @@
+.closeicon {
+  font-size: xx-large;
+  color: #ec0000;
+  transition: all .2s ease-out;
+
+  &:hover {
+    color: #ff0000;
+  }
+}
